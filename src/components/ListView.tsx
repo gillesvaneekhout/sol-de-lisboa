@@ -1,7 +1,18 @@
 "use client";
 
-import type { TerraceWithStatus, SortMode } from "@/types";
+import type { TerraceWithStatus, SortMode, TerraceArchetype } from "@/types";
 import { priceLevelString, formatTime, sortTerraces, sunStatusColor, venueTypeIcon } from "@/lib/utils";
+import { formatConfidenceLabel } from "@/lib/dataQuality";
+import { getArchetype } from "@/lib/archetypeHeuristics";
+
+const ARCHETYPE_ICON: Record<TerraceArchetype, string> = {
+  rooftop: "🏙️",
+  miradouro: "🌅",
+  waterfront: "🌊",
+  courtyard: "🌿",
+  street: "🪑",
+  unknown: "",
+};
 
 interface ListViewProps {
   terraces: TerraceWithStatus[];
@@ -125,7 +136,16 @@ export default function ListView({
                 </div>
 
                 <div className="mt-2 flex items-center gap-1.5 flex-wrap">
-                  {venue.tags.slice(0, 3).map((tag) => (
+                  {(() => {
+                    const arch = getArchetype(venue);
+                    const icon = ARCHETYPE_ICON[arch];
+                    return icon ? (
+                      <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] text-neutral-400">
+                        {icon}
+                      </span>
+                    ) : null;
+                  })()}
+                  {venue.tags.slice(0, 2).map((tag) => (
                     <span
                       key={tag}
                       className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] text-neutral-500"
@@ -133,6 +153,15 @@ export default function ListView({
                       {tag}
                     </span>
                   ))}
+                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                    venue.quality.confidence === "high"
+                      ? "bg-emerald-500/15 text-emerald-300"
+                      : venue.quality.confidence === "medium"
+                      ? "bg-amber-500/15 text-amber-300"
+                      : "bg-rose-500/15 text-rose-300"
+                  }`}>
+                    {formatConfidenceLabel(venue.quality.confidence)}
+                  </span>
                 </div>
               </div>
             </button>

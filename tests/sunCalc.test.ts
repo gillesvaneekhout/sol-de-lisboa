@@ -58,6 +58,16 @@ const rooftopTerrace: Terrace = {
   name: "Test Rooftop",
   facingDegrees: 180,
   shadingRadius: 10, // minimal shading (rooftop)
+  archetype: "rooftop",
+};
+
+const miradouroTerrace: Terrace = {
+  ...southFacingTerrace,
+  id: "test-miradouro",
+  name: "Test Miradouro",
+  facingDegrees: 180,
+  shadingRadius: 30,
+  archetype: "miradouro",
 };
 
 describe("angleDifference", () => {
@@ -206,6 +216,46 @@ describe("findNextSunnyTime", () => {
     if (next) {
       expect(next.getUTCHours()).toBeLessThanOrEqual(22);
     }
+  });
+});
+
+describe("archetype bypass", () => {
+  it("rooftop terrace is always sunny when sun is up", () => {
+    const midday = lisbonDate(2024, 6, 21, 12, 0);
+    expect(getTerraceStatus(rooftopTerrace, midday)).toBe("sunny");
+  });
+
+  it("miradouro terrace is always sunny when sun is up", () => {
+    const midday = lisbonDate(2024, 6, 21, 12, 0);
+    expect(getTerraceStatus(miradouroTerrace, midday)).toBe("sunny");
+  });
+
+  it("rooftop terrace is shaded at night", () => {
+    const night = lisbonDate(2024, 6, 21, 22, 0);
+    expect(getTerraceStatus(rooftopTerrace, night)).toBe("shaded");
+  });
+
+  it("rooftop terrace bypasses building shadow data", () => {
+    // Even with fake surrounding buildings, rooftop should be sunny at midday
+    const midday = lisbonDate(2024, 6, 21, 12, 0);
+    const fakeSurroundingBuildings = [
+      {
+        id: 1,
+        height: 50,
+        levels: 15,
+        polygon: [
+          [-9.142, 38.716],
+          [-9.141, 38.716],
+          [-9.141, 38.717],
+          [-9.142, 38.717],
+          [-9.142, 38.716],
+        ] as [number, number][],
+        centroid: [-9.1415, 38.7165] as [number, number],
+        type: "building",
+        heightSource: "osm-levels" as const,
+      },
+    ];
+    expect(getTerraceStatus(rooftopTerrace, midday, fakeSurroundingBuildings)).toBe("sunny");
   });
 });
 

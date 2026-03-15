@@ -38,3 +38,32 @@ The algorithm:
 ## Dataset
 
 30 real Lisbon terraces across Bairro Alto, Príncipe Real, LX Factory, Cais do Sodré, Alfama, Chiado, and Graça. Each venue has approximate facing direction based on actual street layout.
+
+## Data pipeline notes
+
+Current source stack:
+- OSM for venue matching + building footprints
+- Overture for building height / floor enrichment
+- confidence scoring in-app to expose estimated vs stronger predictions
+- EUBUCCO ingestion pipeline started for scalable future enrichment experiments
+
+EUBUCCO helper scripts:
+- `src/scripts/fetchEubuccoPortugal.sh`
+- `src/scripts/extractEubuccoLisboa.sh`
+- `src/scripts/enrichFromEubucco.ts`
+
+Venue scaling helpers:
+- `src/data/terraces.seed.json` — template for adding new venues
+- `npm run terraces:add` — merge new seed venues into the main dataset
+- `npm run terraces:normalize` — validate + normalize the dataset after changes
+
+Data model note:
+- `lat/lng` = venue / business coordinates
+- `terraceLat/terraceLng` = actual terrace coordinates when known
+- this matters for shadow accuracy and future scaling
+
+Eval commands:
+- `npm run eval`
+- `npm run eval:report`
+
+See `RESEARCH.md` for the source decision doc.

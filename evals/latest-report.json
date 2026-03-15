@@ -1,0 +1,193 @@
+{
+  "generatedAt": "2026-03-14T13:44:49.282Z",
+  "venueCount": 47,
+  "coordinateSources": {
+    "osm": 41,
+    "estimated": 3,
+    "curated": 3
+  },
+  "terraceCoordinateSources": {
+    "osm": 17,
+    "curated": 25,
+    "estimated": 5
+  },
+  "confidence": {
+    "high": 42,
+    "low": 5
+  },
+  "terracePointCoverage": {
+    "explicit": 22,
+    "implicit": 25
+  },
+  "lidarCoverage": {
+    "realLidar": 47,
+    "noSchedule": 0
+  },
+  "heightSources": {
+    "default-estimate": 6693,
+    "osm-levels": 1684,
+    "overture": 56
+  },
+  "archetypes": {
+    "street": 19,
+    "rooftop": 8,
+    "waterfront": 6,
+    "miradouro": 9,
+    "courtyard": 5
+  },
+  "needsTerraceReview": 9,
+  "weakestVenues": [
+    {
+      "id": "doca-peixe",
+      "name": "Doca Peixe",
+      "confidence": "high",
+      "heightCoverage": 0,
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "waterfront"
+    },
+    {
+      "id": "jardim-torel-cafe",
+      "name": "Café do Jardim do Torel",
+      "confidence": "high",
+      "heightCoverage": 0.027777777777777776,
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "miradouro"
+    },
+    {
+      "id": "sao-pedro-alcantara-kiosk",
+      "name": "Quiosque de São Pedro de Alcântara",
+      "confidence": "high",
+      "heightCoverage": 0.03914590747330961,
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "miradouro"
+    },
+    {
+      "id": "timeout-market",
+      "name": "Time Out Market Terrace",
+      "confidence": "high",
+      "heightCoverage": 0.041666666666666664,
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "waterfront"
+    },
+    {
+      "id": "cervejaria-trindade",
+      "name": "Cervejaria Trindade",
+      "confidence": "high",
+      "heightCoverage": 0.046875,
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "osm",
+      "archetype": "street"
+    },
+    {
+      "id": "cafe-garagem",
+      "name": "Café da Garagem",
+      "confidence": "high",
+      "heightCoverage": 0.047058823529411764,
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "miradouro"
+    },
+    {
+      "id": "the-insolito",
+      "name": "The Insólito",
+      "confidence": "high",
+      "heightCoverage": 0.05204460966542751,
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "rooftop"
+    },
+    {
+      "id": "pensao-amor",
+      "name": "Pensão Amor",
+      "confidence": "high",
+      "heightCoverage": 0.064,
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "osm",
+      "archetype": "street"
+    },
+    {
+      "id": "bistro-100-maneiras",
+      "name": "Bistro 100 Maneiras",
+      "confidence": "high",
+      "heightCoverage": 0.07876712328767123,
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "osm",
+      "archetype": "street"
+    },
+    {
+      "id": "carpe-diem-arte",
+      "name": "Carpe Diem Arte e Pesquisa",
+      "confidence": "high",
+      "heightCoverage": 0.1037344398340249,
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "courtyard"
+    }
+  ],
+  "reviewQueue": [
+    "cafe-garagem",
+    "chapito",
+    "lost-in",
+    "memmo-alfama",
+    "noobai",
+    "park-bar",
+    "silk-club",
+    "topo-chiado",
+    "topo-martim-moniz"
+  ],
+  "fullyEstimatedVenues": [],
+  "goldenCases": [
+    {
+      "id": "portas-do-sol",
+      "name": "Miradouro Portas do Sol",
+      "confidence": "high",
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "miradouro"
+    },
+    {
+      "id": "quiosque-ribeira",
+      "name": "Quiosque da Ribeira das Naus",
+      "confidence": "high",
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "waterfront"
+    },
+    {
+      "id": "park-bar",
+      "name": "PARK Bar",
+      "confidence": "high",
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "rooftop"
+    },
+    {
+      "id": "topo-chiado",
+      "name": "TOPO Chiado",
+      "confidence": "high",
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "rooftop"
+    },
+    {
+      "id": "silk-club",
+      "name": "Silk Club",
+      "confidence": "high",
+      "coordinateSource": "osm",
+      "terraceCoordinateSource": "curated",
+      "archetype": "rooftop"
+    },
+    {
+      "id": "rio-maravilha",
+      "name": "Rio Maravilha",
+      "confidence": "low",
+      "coordinateSource": "estimated",
+      "terraceCoordinateSource": "estimated",
+      "archetype": "rooftop"
+    }
+  ]
+}

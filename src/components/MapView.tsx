@@ -5,6 +5,7 @@ import L from "leaflet";
 import type { Map as LeafletMap, CircleMarker } from "leaflet";
 import type { TerraceWithStatus } from "@/types";
 import { sunStatusColor } from "@/lib/utils";
+import { getTerracePoint } from "@/lib/terraceCoords";
 
 interface MapViewProps {
   terraces: TerraceWithStatus[];
@@ -63,8 +64,9 @@ export default function MapView({
     terraces.forEach((terrace) => {
       const color = sunStatusColor(terrace.sunStatus);
       const isSelected = terrace.id === selectedId;
+      const point = getTerracePoint(terrace);
 
-      const marker = L.circleMarker([terrace.lat, terrace.lng], {
+      const marker = L.circleMarker([point.lat, point.lng], {
         radius: isSelected ? 14 : 11,
         fillColor: color,
         color: "#ffffff",
@@ -96,7 +98,7 @@ export default function MapView({
           iconSize: [14, 14],
           iconAnchor: [7, 7],
         });
-        const heartMarker = L.marker([terrace.lat, terrace.lng], {
+        const heartMarker = L.marker([point.lat, point.lng], {
           icon: heartIcon,
           interactive: false,
           zIndexOffset: 1000,

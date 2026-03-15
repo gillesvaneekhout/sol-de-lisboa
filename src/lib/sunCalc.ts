@@ -1,6 +1,15 @@
 import SunCalc from "suncalc";
 import type { Terrace, SunStatus, SunPosition, BuildingInfo } from "@/types";
 import { getShadowStatus } from "./shadowCalc";
+import { getTerracePoint } from "./terraceCoords";
+import { getArchetype } from "./archetypeHeuristics";
+import { getScheduleStatus } from "./shadowSchedule";
+
+// Shadow accuracy comes from LiDAR (process-lidar.py). The pre-computed shadow
+// schedules in src/data/shadow-schedules/ are the primary shadow engine.
+// The building polygons in src/data/buildings/ are used for visual display only.
+// The 3D shadow projection and facing-direction fallbacks below are legacy paths
+// kept for venues that may not yet have a LiDAR schedule.
 
 /**
  * Get the sun's position in degrees for a given location and time.
@@ -45,16 +54,31 @@ export function getTerraceStatus(
   date: Date,
   buildings?: BuildingInfo[]
 ): SunStatus {
-  const sun = getSunPosition(terrace.lat, terrace.lng, date);
+  // Use pre-computed shadow schedule if available (highest fidelity)
+  const scheduleResult = getScheduleStatus(terrace.id, date);
+  if (scheduleResult !== null) {
+    return scheduleResult;
+  }
+
+  // Fallback: real-time calculation
+  const point = getTerracePoint(terrace);
+  const sun = getSunPosition(point.lat, point.lng, date);
 
   // Sun below useful threshold
   if (sun.altitude < 5) {
     return "shaded";
   }
 
+  // Rooftop and miradouro terraces are above street-level building shadows.
+  // Skip 3D shadow model — only sun altitude matters.
+  const archetype = getArchetype(terrace);
+  if (archetype === "rooftop" || archetype === "miradouro") {
+    return sun.altitude >= 5 ? "sunny" : "shaded";
+  }
+
   // If we have real building data, use 3D shadow projection
   if (buildings && buildings.length > 0) {
-    return getShadowStatus(terrace.lat, terrace.lng, buildings, sun);
+    return getShadowStatus(point.lat, point.lng, buildings, sun);
   }
 
   // Fallback: original estimation based on facing direction and shading radius

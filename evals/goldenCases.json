@@ -1,0 +1,46 @@
+[
+  {
+    "id": "portas-do-sol",
+    "name": "Miradouro Portas do Sol",
+    "expectations": [
+      "should not be low-confidence if venue data stays strong",
+      "should tend to be better in the morning / midday than late evening"
+    ]
+  },
+  {
+    "id": "quiosque-ribeira",
+    "name": "Quiosque da Ribeira das Naus",
+    "expectations": [
+      "should have broad open-sky behavior",
+      "should not look like a narrow shaded courtyard"
+    ]
+  },
+  {
+    "id": "park-bar",
+    "name": "PARK Bar",
+    "expectations": [
+      "rooftop case; do not treat like a generic street café"
+    ]
+  },
+  {
+    "id": "topo-chiado",
+    "name": "TOPO Chiado",
+    "expectations": [
+      "rooftop case; should retain strong viewpoint behavior"
+    ]
+  },
+  {
+    "id": "silk-club",
+    "name": "Silk Club",
+    "expectations": [
+      "rooftop case; should not be over-penalized by street-level assumptions"
+    ]
+  },
+  {
+    "id": "rio-maravilha",
+    "name": "Rio Maravilha",
+    "expectations": [
+      "should remain explicitly lower-confidence until terrace location improves"
+    ]
+  }
+]

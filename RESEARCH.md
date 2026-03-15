@@ -1,149 +1,431 @@
-# Sol de Lisboa — Data Source Research
+# Sol de Lisboa — Data Source Research & Decision Doc
 
-Research conducted 2026-03-12.
+Updated: 2026-03-13
 
-## Data Source Evaluation
+## What we are solving
+We need reliable enough data to answer one user question:
 
-| Source | Available for Lisbon | Has Heights | Quality | Notes |
-|--------|---------------------|-------------|---------|-------|
-| OSM Overpass — venues | ✅ Yes | N/A | Good | 170 venues with `outdoor_seating=yes`; matched 24 of 30 by name |
-| OSM Overpass — buildings | ✅ Yes | Partial | Good | 260 buildings near Noobai; 0% `building:height`, 48% `building:levels` |
-| **Overture Maps** | ✅ Yes | Partial | Good | 18,774 buildings in central Lisbon; 3.4% have height, 20.9% have num_floors |
-| WSF3D (DLR/NASA) | ✅ Yes | Yes (avg) | ~90m grid | GeoTIFF raster; neighborhood-level average building heights; CC-BY-4.0 |
-| GHSL GHS-BUILT-H (EU JRC) | ✅ Yes | Yes (avg) | ~100m grid | Free global raster; similar to WSF3D; epoch 2018 |
-| EUBUCCO | ✅ Yes | Yes (74-100%) | Individual buildings | Per-building heights for EU; no working API, country GPKG download |
-| Microsoft ML Footprints | ✅ Yes | Partial | ML-derived | 174M global; per-building polygons + heights where available |
-| OSMBuildings tile API | ❌ 403 Forbidden | Yes (partial) | N/A | Requires API key now; free tier no longer anonymous |
-| Lisbon Open Data (dados.lisboa.pt) | ❌ DNS failure | Unknown | N/A | Portal unreachable; may have moved |
-| DGT Portugal / SNIG | ⚠️ No results | No | N/A | Has LiDAR survey of Portugal but no open building height API |
-| Open Topography LiDAR | ❌ No data | N/A | N/A | No LiDAR coverage for Lisbon in OpenTopography catalog |
-| OSM Portugal building import | ❌ No import | N/A | N/A | No organized building height import exists for Portugal |
-| Mapillary | ⚠️ Needs token | N/A | N/A | Skipped — requires API key |
+**Which Lisbon terraces are sunny now, and how confident are we in that answer?**
 
-## Recommended Approach (Updated)
+That means we need 3 things:
+1. **Venue truth** — where the terrace actually is
+2. **Building truth** — nearby geometry + height data
+3. **Prediction confidence** — how much of the answer is real data vs estimation
 
-**Building data**: OSM Overpass API for geometry + levels, enriched with **Overture Maps** height/floor data via DuckDB S3 query. Lisbon-specific floor height estimation: ground floor 4.2m (commercial) or 3.2m (residential), upper floors 3.0m each.
+---
 
-**Height data coverage after enrichment**:
-- 5,283 total buildings across 30 venue areas
-- 1,081 had OSM levels data (re-estimated with Lisbon-specific heights)
-- 530 enriched from Overture Maps (69 with direct height, 461 with floor count)
-- 3,672 buildings retain 15m default (no data from any source)
-- **30.5% of buildings now have real height data** (up from ~20% with OSM alone)
+## Current conclusion
+There is no single perfect source.
 
-**Shadow calculation**: Custom implementation using `suncalc` + `@turf/turf`. Algorithm:
-1. Get sun position (azimuth, altitude) from SunCalc
-2. For each nearby building, project its polygon in shadow direction
-3. Check if terrace point falls within any shadow polygon
+The best architecture is a **stack of complementary sources**:
+- **OSM** as the open base layer for venues + building geometry
+- **Overture Buildings** as the main open height/floor enrichment layer
+- **EUBUCCO** as the best candidate for deeper per-building height coverage
+- **WSF3D / GHSL** as coarse fallback layers
+- **Google Places** as the strongest commercial complement for terrace / outdoor seating truth
 
-**Venue coordinates**: Updated 24 of 30 venues with real OSM coordinates. 6 remain with original/estimated coordinates (not found in OSM).
+This means the product should be built around **confidence-aware fusion**, not around one “magic” dataset.
 
-## OSM Venue Matches (24 of 30)
+---
 
-| Venue ID | OSM Name | OSM Lat | OSM Lng | Old Lat | Old Lng |
-|----------|----------|---------|---------|---------|---------|
-| noobai | Noobai | 38.7096 | -9.1480 | 38.7104 | -9.1487 |
-| lost-in | Lost In | 38.7160 | -9.1460 | 38.7155 | -9.1475 |
-| park-bar | Park Rooftop | 38.7112 | -9.1476 | 38.7118 | -9.1462 |
-| pensao-amor | Pensão Amor | 38.7073 | -9.1437 | 38.7083 | -9.1440 |
-| landeau | Landeau Chocolate | 38.7028 | -9.1787 | 38.7032 | -9.1770 |
-| cafe-a-brasileira | A Brasileira | 38.7107 | -9.1420 | 38.7107 | -9.1424 |
-| pavilhao-chines | Pavilhão Chinês | 38.7157 | -9.1468 | 38.7153 | -9.1485 |
-| bettina-corallo | Niccolo & Bettina Corallo | 38.7173 | -9.1493 | 38.7167 | -9.1478 |
-| cervejaria-trindade | Cervejaria Trindade | 38.7124 | -9.1424 | 38.7125 | -9.1427 |
-| dear-breakfast | Dear Breakfast | 38.7096 | -9.1513 | 38.7091 | -9.1445 |
-| pharmacia | Restaurante Pharmacia | 38.7101 | -9.1474 | 38.7110 | -9.1487 |
-| quiosque-ribeira | Quiosque Ribeira das Naus | 38.7056 | -9.1415 | 38.7069 | -9.1411 |
-| senhor-uva | Senhor Uva | 38.7145 | -9.1568 | 38.7101 | -9.1473 |
-| topo-chiado | Topo Chiado | 38.7125 | -9.1400 | 38.7119 | -9.1399 |
-| bistro-100-maneiras | Bistro 100 maneiras | 38.7121 | -9.1429 | 38.7130 | -9.1432 |
-| portas-do-sol | Portas do Sol | 38.7127 | -9.1303 | 38.7128 | -9.1303 |
-| chapito | Chapitô à Mesa | 38.7115 | -9.1339 | 38.7131 | -9.1316 |
-| memmo-alfama | Memmo Alfama | 38.7103 | -9.1305 | 38.7108 | -9.1290 |
-| cafe-garagem | Café da Garagem | 38.7149 | -9.1326 | 38.7138 | -9.1334 |
-| quiosque-renatinho | Quiosque Príncipe Real | 38.7162 | -9.1479 | 38.7162 | -9.1505 |
-| topo-martim-moniz | TOPO | 38.7168 | -9.1365 | 38.7155 | -9.1365 |
-| timeout-market | Time Out Market Lisboa | 38.7071 | -9.1459 | 38.7068 | -9.1458 |
-| silk-club | Silk Club | 38.7114 | -9.1428 | 38.7112 | -9.1441 |
-| graça-esplanada | Esplanada Igreja da Graça | 38.7162 | -9.1315 | 38.7175 | -9.1303 |
+## Source matrix
 
-## Venues NOT Found in OSM (6 of 30)
+### 1) Venue / terrace sources
 
-These venues are not present in OpenStreetMap and retain their original estimated coordinates:
+#### OpenStreetMap (OSM)
+**Use for:** open venue discovery + outdoor seating indicators + geometry context
 
-| Venue ID | Name | Lat | Lng | Notes |
-|----------|------|-----|-----|-------|
-| rio-maravilha | Rio Maravilha | 38.7035 | -9.1775 | LX Factory; not in OSM |
-| limao | Limão | 38.7038 | -9.1768 | LX Factory; not in OSM |
-| espresso-largo | Café no Largo | 38.7115 | -9.1415 | Chiado; not in OSM |
-| majong | Majong | 38.7123 | -9.1459 | Bairro Alto; not in OSM |
-| jardim-dos-sentidos | Jardim dos Sentidos | 38.7175 | -9.1500 | Príncipe Real; not in OSM |
-| bar-da-fábrica | Bar da Fábrica | 38.7030 | -9.1773 | LX Factory; not in OSM |
+Relevant tags:
+- `outdoor_seating=yes`
+- `leisure=outdoor_seating`
+- `amenity=restaurant`
+- `amenity=cafe`
+- `amenity=bar`
 
-## Building Height Source Research (v2)
+**Strengths**
+- Open and free
+- Excellent for base discovery
+- Queryable via Overpass
+- Gives us explicit terrace-related tagging in some cases
 
-### Overture Maps (Primary enrichment source)
-- **18,774 buildings** in central Lisbon bbox
-- **3.4% with explicit height** (634 buildings, avg 13.5m)
-- **20.9% with num_floors** (3,919 buildings, avg 4.23 floors)
-- **22% have some vertical data**, 78% are bare footprints
-- Data from OSM + Microsoft ML Buildings + Google Open Buildings
-- Queried via DuckDB from `s3://overturemaps-us-west-2/release/2026-02-18.0/`
+**Weaknesses**
+- Coverage inconsistent
+- Some real venues missing entirely
+- Terrace position can still be approximate
 
-### WSF3D (DLR/NASA)
-- Global building height raster at ~90m resolution
-- GeoTIFF tiles available at `https://download.geoservice.dlr.de/WSF3D/files/tiles/`
-- CC-BY-4.0 license
-- Too coarse for individual buildings but useful as fallback for neighborhood averages
+**Decision**
+- Keep as **primary open source** for venue discovery and matching
+- Good enough for MVP seed dataset
 
-### GHSL GHS-BUILT-H (EU JRC)
-- Similar to WSF3D: ~100m resolution global raster
-- Free download from JRC FTP (redirects to Copernicus Emergency portal)
-- Epoch 2018; good for validating neighborhood-level estimates
+---
 
-### EUBUCCO
-- Individual building polygons with heights for all EU countries including Portugal
-- 74-100% height coverage; available as GeoPackage on Zenodo
-- No working API; requires full country download (~GBs)
-- Best potential source for comprehensive per-building heights
+#### Google Places API
+**Use for:** validating venue existence and outdoor seating availability
 
-### Microsoft ML Building Footprints
-- Per-building polygons with ML-derived heights for 174M buildings globally
-- Country-level GeoJSON downloads; Portugal included
-- Height quality varies (ML-estimated, not surveyed)
+Key field:
+- `outdoorSeating` (Places API New; explicit field mask required)
 
-### DGT Portugal
-- Has conducted national LiDAR survey ("Levantamento LiDAR de Portugal Continental")
-- Potentially highest resolution source but no open API or download found
-- Manages SNIG (4,513 datasets) and SNIC (1.79M properties)
+**Strengths**
+- Strong commercial source for place truth
+- Explicit outdoor seating attribute
+- Likely better recall than OSM for some venues
 
-## Height Estimation Logic
+**Weaknesses**
+- Paid
+- Requires API key and field-mask discipline
+- Not ideal as the only source of truth for geometry / terrace exact position
 
-For buildings with `building:levels` from OSM or `num_floors` from Overture:
-- Ground floor: 4.2m (commercial/mixed) or 3.2m (residential/house)
-- Upper floors: 3.0m each
-- Example: 5-story commercial building = 4.2 + 4 × 3.0 = **16.2m**
+**Decision**
+- Best **commercial complement**
+- Worth testing as a second-pass validator / enrichment layer
+- Not necessary for MVP if we stay curated, but very useful for scale-up
 
-For buildings without any level/height data: **15m default** (typical 5-story Lisbon building).
+---
 
-## OSM Building Data (Sample: Noobai Café area, 150m radius)
+#### Overture Places
+**Use for:** possible dedup / normalization layer for venue entities
 
-- **260 buildings** found
-- **0%** have explicit `building:height` tags
-- **48%** have `building:levels` tags (range: 2-6 levels)
-- **0%** have generic `height` tags
-- Building types: yes (127), apartments (74), residential (47), house (4), church (2), retail (2), hotel (1), school (1)
-- Most buildings have full polygon geometry (lat/lng vertices) via `out body geom`
+**Strengths**
+- Open and permissive
+- Good broader place graph potential
 
-## NPM Package Assessment
+**Weaknesses**
+- Outdoor seating signal is less obvious than in OSM or Google Places
+- Not clearly better than OSM for terrace-specific truth
 
-| Package | Use Case | Decision |
-|---------|----------|----------|
-| suncalc | Sun position (azimuth, altitude) | Already installed |
-| @turf/turf | Polygon operations (point-in-polygon, buffer, projection) | Installed |
-| three.js | 3D rendering / raycasting | Overkill for 2D shadow check |
-| @math.gl/sun | Alternative sun calc | Not needed, suncalc sufficient |
+**Decision**
+- Not priority for current MVP
+- Consider later for scaling / deduping
 
-## Data Fetched and Cached
+---
 
-Building data fetched via Overpass API for all 30 venues (150m radius each). Saved to `src/data/buildings/`. Heights enriched from Overture Maps (530 buildings) and re-estimated with Lisbon-specific floor heights (1,081 buildings). Enrichment script: `src/scripts/enrichBuildingHeights.ts`.
+### 2) Building geometry + height sources
+
+#### OpenStreetMap buildings
+**Use for:** footprints + `building:levels` base layer
+
+**Strengths**
+- Open and queryable
+- Good footprint coverage
+- Gives some levels data
+
+**Weaknesses**
+- Explicit heights are sparse in Lisbon
+- Coverage quality varies a lot by neighborhood
+
+**Decision**
+- Keep as **base geometry layer**
+- Essential, but not enough by itself
+
+---
+
+#### Overture Buildings
+**Use for:** main enrichment source for `height` and `num_floors`
+
+Key attributes:
+- `height`
+- `num_floors`
+- also building / building_part structure
+
+**Strengths**
+- Strongest open complement to OSM right now
+- More useful vertical data than OSM alone
+- Good fit for DuckDB / batch enrichment workflows
+
+**Weaknesses**
+- Still incomplete
+- Coverage uneven
+- Heights not universal
+
+**Decision**
+- Keep as **primary enrichment source** for MVP
+- Best open option currently in practice
+
+---
+
+#### EUBUCCO
+**Use for:** deeper per-building height enrichment in Europe
+
+Data notes:
+- EU-wide building dataset
+- Portugal included
+- Height coverage reported at large scale
+- Available as GeoPackage / CSV
+- Docs + downloads available through EUBUCCO
+
+**Strengths**
+- Most promising source for richer per-building European coverage
+- More aligned with our real problem than coarse raster layers
+
+**Weaknesses**
+- Heavier to work with
+- Not as quick to query as OSM / Overture
+- Requires a proper local processing pipeline
+
+**Decision**
+- **Highest-value next source to test**
+- Most likely source to materially improve low-confidence venues
+
+---
+
+#### WSF3D
+**Use for:** coarse fallback height context
+
+Data notes:
+- ~90m resolution
+- average building height / built-up statistics
+
+**Strengths**
+- Open
+- Good broad fallback when nothing else exists
+
+**Weaknesses**
+- Too coarse for individual terrace precision
+- Better for neighborhood context than building-level truth
+
+**Decision**
+- Use only as **fallback / sanity-check layer**
+- Not suitable as primary building-height source
+
+---
+
+#### GHSL GHS-BUILT-H
+**Use for:** coarse fallback and validation
+
+Data notes:
+- ~100m resolution
+- global average building height layer
+
+**Strengths**
+- Open and easy to cite
+- Good for large-scale validation
+
+**Weaknesses**
+- Too coarse for terrace-level predictions
+
+**Decision**
+- Same role as WSF3D: **fallback / benchmark**, not primary
+
+---
+
+#### Portugal-specific / OneGeo
+**Use for:** potential future country-specific height layer
+
+Current signal:
+- OneGeo suggests Portugal-wide elevation / building height coverage is becoming available
+
+**Strengths**
+- Could become the strongest localized height source
+- Country-specific data could beat global open layers
+
+**Weaknesses**
+- Commercial / evolving availability
+- Needs actual technical validation, not just marketing claims
+
+**Decision**
+- Worth monitoring
+- Not current MVP dependency
+
+---
+
+### 3) Shadow / sun sources
+
+#### Our own shadow model
+**Use for:** actual product logic
+
+Current stack:
+- `suncalc`
+- building polygons
+- projected shadows
+
+**Strengths**
+- Fully controllable
+- Transparent
+- Can evolve with our own confidence layer
+
+**Weaknesses**
+- Accuracy limited by input data quality
+
+**Decision**
+- Keep this as the core product engine
+
+---
+
+#### Shadowmap / external shadow products
+**Use for:** benchmarking, not core dependency
+
+**Strengths**
+- Helpful as benchmark / inspiration
+
+**Weaknesses**
+- External dependency
+- Not aligned with our goal of owning the logic and confidence model
+
+**Decision**
+- Use for comparison only if needed
+
+---
+
+## Recommended MVP architecture
+
+### Venue layer
+1. Curated venue list
+2. Match against OSM first
+3. Mark unmatched venues explicitly as estimated
+4. Optionally validate with Google Places later
+
+### Building layer
+1. OSM footprints
+2. Overture enrichment for height / floors
+3. If still weak, test EUBUCCO on low-confidence zones
+4. Use WSF3D / GHSL only as coarse fallback
+
+### Prediction layer
+1. Compute sun position with `suncalc`
+2. Compute shadows from building polygons
+3. Score confidence based on:
+   - coordinate source
+   - percentage of nearby buildings with real height data
+   - future: rooftop / miradouro / courtyard heuristics
+
+---
+
+## What matters most now
+The biggest product risk is **false precision**.
+
+The app must not act like all predictions are equally trustworthy.
+
+So the correct loop is:
+1. show prediction
+2. show confidence
+3. improve the weakest venues first
+4. repeat
+
+---
+
+## Priority next experiments
+
+### P1. Test EUBUCCO against weakest venues
+Goal:
+- see if it materially improves building-height coverage for low-confidence venues
+- especially LX Factory and other estimated / sparse-height areas
+
+Reality check from metadata:
+- Lisboa city id: `v0.1-PRT.12.7_1`
+- ~40,669 total buildings
+- ~3,588 with height data
+- roughly **9% reported height coverage**
+
+So EUBUCCO is still worth testing, but as a complement to Overture rather than a replacement.
+
+Success criterion:
+- clear improvement over Overture-only coverage
+
+### P2. Test Google Places as terrace-validation layer
+Goal:
+- validate venue existence
+- validate outdoor seating signal
+- improve venue matching for missing / weak OSM records
+
+Success criterion:
+- helps recover or validate the currently estimated venues
+
+### P3. Build confidence-aware ingestion pipeline
+Goal:
+- keep source provenance per venue and building
+- avoid losing which values are real vs estimated
+
+Success criterion:
+- every venue answer can explain why it is high / medium / low confidence
+
+---
+
+## MVP decision
+If we want to keep moving fast:
+
+**MVP stack**
+- curated venues
+- OSM for venue matching + building footprints
+- Overture for height enrichment
+- confidence labels in app
+- manual cleanup of low-confidence venues
+
+**Next layer after MVP**
+- EUBUCCO height experiment
+- Google Places validation pass
+- only then consider more advanced scaling
+
+---
+
+## Bottom line
+The right approach is not “find one better data source.”
+
+The right approach is:
+- **OSM + Overture for MVP**
+- **EUBUCCO as the main next test**
+- **Google Places as the best terrace-truth complement**
+- **confidence-aware UX from day one**
+
+That gives us something honest, useful, and improvable.
+
+---
+
+## LiDAR Shadow Pipeline (MDS-50cm)
+
+### What it does
+Uses DGT's 50cm Digital Surface Model (MDS) tiles to compute per-venue shadow schedules via LiDAR-based ray casting. This replaces the building-polygon shadow model with actual measured surface elevation data that includes buildings, trees, walls — everything that blocks sunlight.
+
+### Data source
+- **DGT MDS-50cm** — Portuguese national 50cm resolution Digital Surface Model
+- CRS: EPSG:3763 (ETRS89/PT-TM06)
+- Tiles: 2000×2000 pixels (1000m × 1000m), Float32, nodata=-999
+- STAC API: `https://cdd.dgterritorio.gov.pt/dgt-be/v1/collections/MDS-50cm/items/MDS-50cm-{tileId}-07-2024`
+- Currently: 29 tiles covering central Lisbon (38 of 47 venues)
+
+### How to run
+```bash
+# Install Python dependencies
+pip3 install -r scripts/requirements.txt
+
+# Process all venues
+python3 scripts/process-lidar.py
+
+# Process a single venue
+python3 scripts/process-lidar.py cafe-a-brasileira
+
+# Parallel processing (4 workers)
+python3 scripts/process-lidar.py --parallel 4
+
+# Force re-crop cached tiles
+python3 scripts/process-lidar.py --force
+```
+
+### How to add a new venue
+1. Add the venue to `src/data/terraces.json`
+2. Ensure MDS tiles covering the venue location are in `data/mds-raw/`
+3. Run `python3 scripts/process-lidar.py {venue-id}`
+4. Shadow schedule written to `src/data/shadow-schedules/{venue-id}.json`
+
+### How to download new tiles
+Tile IDs encode grid position: `CCCRRR` where X = (CCC-200)×1000, Y = (RRR-300)×1000 in EPSG:3763. To find the tile ID for a venue, project its lat/lng to EPSG:3763 and compute `col = floor(x/1000) + 200`, `row = ceil(y/1000) + 300`.
+
+### Coverage gaps
+9 venues (mostly LX Factory and waterfront) need tiles 109194, 111194, 112194 which are just south of current coverage. These venues get fallback elevation and show no shadows.
+
+### Algorithm
+For each venue × hour (7-21) × month (1-12):
+1. Get sun position (altitude, azimuth) via pysolar
+2. Cast a ray from the terrace toward the sun at 0.5m intervals
+3. If any MDS elevation sample along the ray exceeds the sun ray height → shaded
+4. Observer height = MDS elevation at venue + 1m (or terraceFloor × 3m if set)
+
+---
+
+## References
+- Google Places API data fields: `outdoorSeating`
+- EUBUCCO docs and data portal
+- Overture Maps buildings schema and guides
+- DLR WSF3D dataset docs
+- Copernicus / GHSL built height docs
+- OneGeo releases / height coverage notes
+- DGT MDS-50cm STAC catalog: `https://cdd.dgterritorio.gov.pt/dgt-be/v1/collections/MDS-50cm`

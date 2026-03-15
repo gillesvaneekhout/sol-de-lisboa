@@ -1,0 +1,50 @@
+[
+  {
+    "id": "brick-cafe",
+    "name": "Brick Cafe",
+    "type": "cafe",
+    "address": "Rua de Moçambique 2, 1170-245 Lisboa",
+    "lat": 38.7262,
+    "lng": -9.1329,
+    "coordinateSource": "osm",
+    "archetype": "street",
+    "facingDegrees": 180,
+    "shadingRadius": 30,
+    "rating": 4.3,
+    "priceLevel": 2,
+    "tags": ["brunch", "coffee", "terrace", "garden", "mouraria"],
+    "description": "Mouraria cafe with a garden terrace and brunch menu, known for its relaxed outdoor seating."
+  },
+  {
+    "id": "primo-do-queijo",
+    "name": "O Primo do Queijo",
+    "type": "bar",
+    "address": "Rua do Forno do Tijolo 42A, 1170-133 Lisboa",
+    "lat": 38.7248,
+    "lng": -9.133,
+    "coordinateSource": "osm",
+    "archetype": "street",
+    "facingDegrees": 180,
+    "shadingRadius": 35,
+    "rating": 4.4,
+    "priceLevel": 2,
+    "tags": ["cheese", "wine", "petiscos", "terrace", "arroios"],
+    "description": "Neighbourhood wine and cheese bar near Intendente with a street terrace popular with locals."
+  },
+  {
+    "id": "josephine-bistro",
+    "name": "Joséphine Bistro & Bar",
+    "type": "bar",
+    "address": "Largo do Intendente Pina Manique 59, 1100-285 Lisboa",
+    "lat": 38.7204,
+    "lng": -9.135,
+    "coordinateSource": "osm",
+    "archetype": "street",
+    "facingDegrees": 180,
+    "shadingRadius": 20,
+    "rating": 4.3,
+    "priceLevel": 2,
+    "tags": ["brunch", "cocktails", "terrace", "intendente", "lively"],
+    "description": "Lively bistro bar on Largo do Intendente with a sunny square-facing terrace, great for brunch and aperitifs."
+  }
+]

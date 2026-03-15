@@ -3,7 +3,7 @@
   "venueName": "Memmo Alfama Terrace",
   "lat": 38.7103,
   "lng": -9.1305,
-  "fetchedAt": "2026-03-12T11:02:26.607Z",
+  "fetchedAt": "2026-03-12T22:33:20.356765Z",
   "buildingCount": 248,
   "buildings": [
     {
@@ -36,7 +36,8 @@
         -9.13207,
         38.7103139
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96322155,
@@ -68,7 +69,8 @@
         -9.13186402,
         38.710380840000006
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96322157,
@@ -104,7 +106,8 @@
         -9.13172675,
         38.710425066666666
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96322165,
@@ -136,7 +139,8 @@
         -9.13222292,
         38.7102641
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "overture"
     },
     {
       "id": 96322175,
@@ -188,7 +192,8 @@
         -9.13198899,
         38.71037148
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96322179,
@@ -228,7 +233,8 @@
         -9.132164471428572,
         38.71030691428571
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96595168,
@@ -280,7 +286,8 @@
         -9.130720150000002,
         38.71013637000001
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595169,
@@ -344,7 +351,8 @@
         -9.131319738461539,
         38.70915005384615
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96595171,
@@ -396,7 +404,8 @@
         -9.13050013,
         38.710136590000005
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595174,
@@ -428,7 +437,8 @@
         -9.13160786,
         38.710061859999996
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595177,
@@ -484,7 +494,8 @@
         -9.13188581818182,
         38.709467854545444
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595178,
@@ -516,7 +527,8 @@
         -9.131404320000001,
         38.710078640000006
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595183,
@@ -548,7 +560,8 @@
         -9.12841282,
         38.71035462
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96595184,
@@ -592,7 +605,8 @@
         -9.1303779,
         38.709565787500004
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96595185,
@@ -628,7 +642,8 @@
         -9.130495933333332,
         38.70954413333333
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96595190,
@@ -664,7 +679,8 @@
         -9.131616833333334,
         38.709464950000005
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595191,
@@ -700,7 +716,8 @@
         -9.131724166666666,
         38.709396700000006
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595195,
@@ -740,7 +757,8 @@
         -9.130622957142856,
         38.70951178571429
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96595198,
@@ -776,7 +794,8 @@
         -9.130980416666668,
         38.709343350000005
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96595202,
@@ -828,7 +847,8 @@
         -9.13105762,
         38.70919943
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96595204,
@@ -896,7 +916,8 @@
         -9.130556121428572,
         38.70936354285714
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595205,
@@ -928,7 +949,8 @@
         -9.131592440000002,
         38.70936562
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595206,
@@ -976,7 +998,8 @@
         -9.131256333333333,
         38.71025191111111
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595207,
@@ -1008,7 +1031,8 @@
         -9.130826039999999,
         38.70951492
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96595216,
@@ -1040,7 +1064,8 @@
         -9.130714639999999,
         38.708931060000005
       ],
-      "type": "commercial"
+      "type": "commercial",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595223,
@@ -1072,7 +1097,8 @@
         -9.13103078,
         38.709438160000005
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595225,
@@ -1108,7 +1134,8 @@
         -9.131283633333334,
         38.709309883333326
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96595230,
@@ -1144,7 +1171,8 @@
         -9.1301344,
         38.709371733333334
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595233,
@@ -1220,7 +1248,8 @@
         -9.131934406249998,
         38.7101505125
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595237,
@@ -1268,7 +1297,8 @@
         -9.131167033333334,
         38.709462800000004
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96595238,
@@ -1308,7 +1338,8 @@
         -9.130902628571429,
         38.71008484285714
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96630678,
@@ -1340,7 +1371,8 @@
         -9.13152014,
         38.70989818
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96630683,
@@ -1440,7 +1472,8 @@
         -9.130778731818182,
         38.709739772727275
       ],
-      "type": "church"
+      "type": "church",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96630686,
@@ -1472,7 +1505,8 @@
         -9.13134698,
         38.70980594
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96630690,
@@ -1512,7 +1546,8 @@
         -9.1313303,
         38.70987788571428
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96630694,
@@ -1568,7 +1603,8 @@
         -9.130803954545454,
         38.709846963636366
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96630696,
@@ -1600,7 +1636,8 @@
         -9.130327699999999,
         38.709940040000006
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96630701,
@@ -1668,7 +1705,8 @@
         -9.131281614285715,
         38.70970506428571
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96630702,
@@ -1708,7 +1746,8 @@
         -9.13167017142857,
         38.709873800000004
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96630705,
@@ -1760,7 +1799,8 @@
         -9.1316278,
         38.709672149999996
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96630706,
@@ -1820,7 +1860,8 @@
         -9.131777558333335,
         38.709656083333336
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96630708,
@@ -1856,7 +1897,8 @@
         -9.130625366666667,
         38.7098981
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96630709,
@@ -1908,7 +1950,8 @@
         -9.13108914,
         38.709847929999995
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96630713,
@@ -1940,7 +1983,8 @@
         -9.13176708,
         38.70991138000001
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96630714,
@@ -1976,7 +2020,8 @@
         -9.130370600000001,
         38.71006439999999
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96633762,
@@ -2028,7 +2073,8 @@
         -9.131255159999998,
         38.71037047
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96633770,
@@ -2080,7 +2126,8 @@
         -9.13201927,
         38.710439789999995
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96633771,
@@ -2116,7 +2163,8 @@
         -9.132127083333334,
         38.71043425
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96633772,
@@ -2196,7 +2244,8 @@
         -9.131427829411765,
         38.710348111764716
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96633779,
@@ -2232,7 +2281,8 @@
         -9.1319116,
         38.710478933333334
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96633802,
@@ -2264,7 +2314,8 @@
         -9.13222578,
         38.710457440000006
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96633811,
@@ -2324,7 +2375,8 @@
         -9.132397891666665,
         38.71061320833332
       ],
-      "type": "roof"
+      "type": "roof",
+      "heightSource": "default-estimate"
     },
     {
       "id": 96758892,
@@ -2356,7 +2408,8 @@
         -9.129113279999999,
         38.709696539999996
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 96758905,
@@ -2440,7 +2493,8 @@
         -9.129355905555556,
         38.711112688888896
       ],
-      "type": "church"
+      "type": "church",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98550154,
@@ -2484,7 +2538,8 @@
         -9.131296149999999,
         38.7111575
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98550169,
@@ -2524,7 +2579,8 @@
         -9.131533757142858,
         38.71106579999999
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98550184,
@@ -2556,7 +2612,8 @@
         -9.130744179999999,
         38.71123812
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98550196,
@@ -2592,7 +2649,8 @@
         -9.129768266666666,
         38.70956685
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98550200,
@@ -2628,7 +2686,8 @@
         -9.13178715,
         38.7112049
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98550205,
@@ -2672,7 +2731,8 @@
         -9.1296111625,
         38.70963195
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98550212,
@@ -2720,7 +2780,8 @@
         -9.130854433333333,
         38.711399655555546
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98550234,
@@ -2756,7 +2817,8 @@
         -9.131022799999998,
         38.71132256666667
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98550243,
@@ -2796,7 +2858,8 @@
         -9.131653,
         38.71124014285714
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98550247,
@@ -2836,7 +2899,8 @@
         -9.130399957142858,
         38.71155888571429
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618170,
@@ -2880,7 +2944,8 @@
         -9.1303627125,
         38.710228362500004
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618172,
@@ -2960,7 +3025,8 @@
         -9.131232711764705,
         38.710857182352946
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618174,
@@ -3000,7 +3066,8 @@
         -9.130735757142856,
         38.71107991428572
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98618177,
@@ -3040,7 +3107,8 @@
         -9.132078385714285,
         38.71068497142857
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618180,
@@ -3072,7 +3140,8 @@
         -9.1307029,
         38.71112016000001
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98618184,
@@ -3120,7 +3189,8 @@
         -9.131682422222221,
         38.71062572222222
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618185,
@@ -3188,7 +3258,8 @@
         -9.130113857142858,
         38.709721107142855
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618187,
@@ -3220,7 +3291,8 @@
         -9.130944539999998,
         38.710251680000006
       ],
-      "type": "shed"
+      "type": "shed",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618191,
@@ -3260,7 +3332,8 @@
         -9.13027607142857,
         38.709755328571426
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618192,
@@ -3292,7 +3365,8 @@
         -9.130899,
         38.71052888
       ],
-      "type": "public"
+      "type": "public",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98618193,
@@ -3324,7 +3398,8 @@
         -9.13035584,
         38.70973228
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618199,
@@ -3372,7 +3447,8 @@
         -9.130488266666667,
         38.71106405555555
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98618202,
@@ -3432,7 +3508,8 @@
         -9.129797816666667,
         38.709793999999995
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618203,
@@ -3468,7 +3545,8 @@
         -9.130502766666666,
         38.71088676666667
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98618208,
@@ -3508,7 +3586,8 @@
         -9.130692914285714,
         38.71167328571429
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618213,
@@ -3544,7 +3623,8 @@
         -9.130593716666667,
         38.71031596666666
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618215,
@@ -3588,7 +3668,8 @@
         -9.130313662499999,
         38.709688875
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618216,
@@ -3632,7 +3713,8 @@
         -9.130078999999999,
         38.709782975
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618217,
@@ -3672,7 +3754,8 @@
         -9.131118328571429,
         38.710733714285716
       ],
-      "type": "retail"
+      "type": "retail",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618218,
@@ -3748,7 +3831,8 @@
         -9.1305907,
         38.71043817499999
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618222,
@@ -3792,7 +3876,8 @@
         -9.131449875000001,
         38.7106384625
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618223,
@@ -3844,7 +3929,8 @@
         -9.13187321,
         38.71066617
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618225,
@@ -3884,7 +3970,8 @@
         -9.130746971428572,
         38.71023728571428
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98618226,
@@ -3916,7 +4003,8 @@
         -9.130405399999999,
         38.709698059999994
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618228,
@@ -3948,7 +4036,8 @@
         -9.130188899999998,
         38.70979106
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618229,
@@ -3992,7 +4081,8 @@
         -9.1299846,
         38.70980169999999
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618231,
@@ -4040,7 +4130,8 @@
         -9.130213099999999,
         38.709611111111116
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618233,
@@ -4084,7 +4175,8 @@
         -9.13212085,
         38.710925825000004
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618237,
@@ -4116,7 +4208,8 @@
         -9.13049762,
         38.71034552
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618238,
@@ -4148,7 +4241,8 @@
         -9.130186320000002,
         38.709940759999995
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98618240,
@@ -4180,7 +4274,8 @@
         -9.13080312,
         38.71036142
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618244,
@@ -4212,7 +4307,8 @@
         -9.12986266,
         38.709675
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "overture"
     },
     {
       "id": 98618249,
@@ -4264,7 +4360,8 @@
         -9.13085111,
         38.710998589999996
       ],
-      "type": "retail"
+      "type": "retail",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98618250,
@@ -4308,7 +4405,8 @@
         -9.129508775,
         38.709808975
       ],
-      "type": "house"
+      "type": "house",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618252,
@@ -4340,7 +4438,8 @@
         -9.130666719999999,
         38.71025834
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 98618253,
@@ -4384,7 +4483,8 @@
         -9.13040025,
         38.71032745
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618255,
@@ -4428,7 +4528,8 @@
         -9.130666162499999,
         38.7102787375
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618256,
@@ -4460,7 +4561,8 @@
         -9.130428120000001,
         38.71028072
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618257,
@@ -4512,7 +4614,8 @@
         -9.129914829999999,
         38.709724249999994
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618259,
@@ -4568,7 +4671,8 @@
         -9.131316318181819,
         38.710694363636364
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618260,
@@ -4620,7 +4724,8 @@
         -9.131529200000001,
         38.71072032
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618261,
@@ -4668,7 +4773,8 @@
         -9.130758333333336,
         38.711670122222216
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98618262,
@@ -4736,7 +4842,8 @@
         -9.131038757142857,
         38.71086758571429
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98661493,
@@ -4808,7 +4915,8 @@
         -9.131381633333332,
         38.71145961333333
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98661502,
@@ -4848,7 +4956,8 @@
         -9.131298785714286,
         38.71153965714286
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98661505,
@@ -4916,7 +5025,8 @@
         -9.131546164285714,
         38.711436464285704
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98661513,
@@ -4968,7 +5078,8 @@
         -9.13114746,
         38.71160705
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 98661518,
@@ -5000,7 +5111,8 @@
         -9.1311813,
         38.711533200000005
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 172191553,
@@ -5036,7 +5148,8 @@
         -9.129232866666667,
         38.71018658333333
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 172191554,
@@ -5100,7 +5213,8 @@
         -9.129544392307691,
         38.71059843846154
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 172191555,
@@ -5140,7 +5254,8 @@
         -9.1293597,
         38.7101291
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 172191556,
@@ -5184,7 +5299,8 @@
         -9.1287631125,
         38.7105556375
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 172191558,
@@ -5224,7 +5340,8 @@
         -9.129758714285714,
         38.71040268571429
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 172191559,
@@ -5276,7 +5393,8 @@
         -9.129828460000002,
         38.71029809000001
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 172191560,
@@ -5312,7 +5430,8 @@
         -9.129276583333334,
         38.71025361666667
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 172191562,
@@ -5348,7 +5467,8 @@
         -9.130024516666666,
         38.710342733333334
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 187313590,
@@ -5380,7 +5500,8 @@
         -9.129443680000001,
         38.710458700000004
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 244981803,
@@ -5420,7 +5541,8 @@
         -9.129557142857143,
         38.71126551428572
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004840,
@@ -5464,7 +5586,8 @@
         -9.129166725,
         38.7108950375
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004842,
@@ -5496,7 +5619,8 @@
         -9.12979252,
         38.7111162
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004847,
@@ -5564,7 +5688,8 @@
         -9.130194757142856,
         38.710320007142855
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004848,
@@ -5604,7 +5729,8 @@
         -9.130071742857144,
         38.71126698571429
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004849,
@@ -5644,7 +5770,8 @@
         -9.129996985714286,
         38.71129305714286
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004850,
@@ -5684,7 +5811,8 @@
         -9.12935702857143,
         38.7109329
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004851,
@@ -5720,7 +5848,8 @@
         -9.129879833333334,
         38.71097496666666
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004852,
@@ -5756,7 +5885,8 @@
         -9.129709049999999,
         38.71150395
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004853,
@@ -5804,7 +5934,8 @@
         -9.129953866666668,
         38.711459033333334
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004856,
@@ -5836,7 +5967,8 @@
         -9.12905782,
         38.7109133
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004857,
@@ -5872,7 +6004,8 @@
         -9.129975416666667,
         38.71159993333333
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004862,
@@ -5908,7 +6041,8 @@
         -9.129521766666665,
         38.7109721
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004867,
@@ -5944,7 +6078,8 @@
         -9.1298337,
         38.711179400000006
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004868,
@@ -5980,7 +6115,8 @@
         -9.129722316666667,
         38.71083451666667
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004870,
@@ -6028,7 +6164,8 @@
         -9.129883688888889,
         38.71149851111112
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004872,
@@ -6084,7 +6221,8 @@
         -9.129920218181818,
         38.71120373636363
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004874,
@@ -6124,7 +6262,8 @@
         -9.129697914285714,
         38.71110792857144
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004875,
@@ -6164,7 +6303,8 @@
         -9.129758371428574,
         38.7109595
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004876,
@@ -6200,7 +6340,8 @@
         -9.129834666666666,
         38.710947483333335
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004877,
@@ -6240,7 +6381,8 @@
         -9.129799971428572,
         38.711496614285714
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004880,
@@ -6292,7 +6434,8 @@
         -9.130053739999997,
         38.71139776
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004881,
@@ -6332,7 +6475,8 @@
         -9.130002928571427,
         38.71115501428572
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004882,
@@ -6388,7 +6532,8 @@
         -9.129158763636363,
         38.71084410909091
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 245004885,
@@ -6444,7 +6589,8 @@
         -9.129701936363636,
         38.71144198181818
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 245004887,
@@ -6504,7 +6650,8 @@
         -9.1293561,
         38.71082459166666
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 263274963,
@@ -6544,7 +6691,8 @@
         -9.129929742857142,
         38.710143599999995
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290241157,
@@ -6580,7 +6728,8 @@
         -9.129432433333333,
         38.71135175
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 290241162,
@@ -6616,7 +6765,8 @@
         -9.129009116666667,
         38.711073266666666
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 290242539,
@@ -6652,7 +6802,8 @@
         -9.129742983333335,
         38.71059851666667
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242540,
@@ -6708,7 +6859,8 @@
         -9.129717972727272,
         38.710715772727276
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242541,
@@ -6744,7 +6896,8 @@
         -9.129396300000002,
         38.71064635
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242542,
@@ -6776,7 +6929,8 @@
         -9.12990096,
         38.710693739999996
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242543,
@@ -6816,7 +6970,8 @@
         -9.1296664,
         38.71074005714286
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242544,
@@ -6856,7 +7011,8 @@
         -9.129497685714286,
         38.71069322857142
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242545,
@@ -6892,7 +7048,8 @@
         -9.129570066666666,
         38.71071378333333
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242546,
@@ -6944,7 +7101,8 @@
         -9.129754749999998,
         38.7107648
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242547,
@@ -6988,7 +7146,8 @@
         -9.129887462500001,
         38.71062882499999
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242549,
@@ -7032,7 +7191,8 @@
         -9.129630825000001,
         38.71064425
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242550,
@@ -7080,7 +7240,8 @@
         -9.129637866666666,
         38.7105683111111
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242551,
@@ -7124,7 +7285,8 @@
         -9.1297445125,
         38.7106739625
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242552,
@@ -7164,7 +7326,8 @@
         -9.12979792857143,
         38.710719257142856
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 290242805,
@@ -7196,7 +7359,8 @@
         -9.12956882,
         38.711431340000004
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 290242807,
@@ -7236,7 +7400,8 @@
         -9.129526471428571,
         38.71140831428572
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 290242808,
@@ -7276,7 +7441,8 @@
         -9.129492842857143,
         38.711394528571425
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 469378483,
@@ -7324,7 +7490,8 @@
         -9.129490811111111,
         38.70972981111112
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 469378484,
@@ -7416,7 +7583,8 @@
         -9.129490565,
         38.70994728
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 471523972,
@@ -7456,7 +7624,8 @@
         -9.130007757142858,
         38.711401928571426
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 565894102,
@@ -7496,7 +7665,8 @@
         -9.130160514285715,
         38.711546042857144
       ],
-      "type": "residential"
+      "type": "residential",
+      "heightSource": "default-estimate"
     },
     {
       "id": 565894104,
@@ -7536,7 +7706,8 @@
         -9.130100571428573,
         38.711646357142854
       ],
-      "type": "residential"
+      "type": "residential",
+      "heightSource": "default-estimate"
     },
     {
       "id": 587662709,
@@ -7572,7 +7743,8 @@
         -9.130451416666666,
         38.71148455
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 633995736,
@@ -7608,7 +7780,8 @@
         -9.12999865,
         38.710918983333336
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 633995737,
@@ -7660,7 +7833,8 @@
         -9.129911719999999,
         38.71082495999999
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 633995738,
@@ -7696,7 +7870,8 @@
         -9.13001635,
         38.71076768333334
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 633995739,
@@ -7728,7 +7903,8 @@
         -9.129917780000001,
         38.71074634
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 668943522,
@@ -7780,7 +7956,8 @@
         -9.12909724,
         38.71064589
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 727096672,
@@ -7816,7 +7993,8 @@
         -9.129185600000001,
         38.71051743333334
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "default-estimate"
     },
     {
       "id": 727096673,
@@ -7876,7 +8054,8 @@
         -9.129190516666668,
         38.710352425
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 752932677,
@@ -7924,7 +8103,8 @@
         -9.129453266666667,
         38.71024227777777
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 752932678,
@@ -7968,7 +8148,8 @@
         -9.1300616,
         38.7100170625
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 758943106,
@@ -8052,7 +8233,8 @@
         -9.130238605555554,
         38.71100312777777
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 866036706,
@@ -8100,7 +8282,8 @@
         -9.129688577777777,
         38.7100783
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 966979255,
@@ -8144,7 +8327,8 @@
         -9.131395525,
         38.7096465
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 966979256,
@@ -8188,7 +8372,8 @@
         -9.131499875,
         38.70964173749999
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1034294948,
@@ -8228,7 +8413,8 @@
         -9.129949,
         38.71149502857143
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1034298719,
@@ -8264,7 +8450,8 @@
         -9.130173316666669,
         38.711493499999996
       ],
-      "type": "residential"
+      "type": "residential",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1034302242,
@@ -8328,7 +8515,8 @@
         -9.130337807692307,
         38.71120355384615
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073492,
@@ -8360,7 +8548,8 @@
         -9.130009240000001,
         38.71096344
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073493,
@@ -8392,7 +8581,8 @@
         -9.13000362,
         38.7109966
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073494,
@@ -8424,7 +8614,8 @@
         -9.129996979999998,
         38.71103966
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073495,
@@ -8460,7 +8651,8 @@
         -9.129963766666666,
         38.7108924
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073496,
@@ -8492,7 +8684,8 @@
         -9.131404839999998,
         38.71074874
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073526,
@@ -8524,7 +8717,8 @@
         -9.129391739999999,
         38.710375039999995
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073527,
@@ -8564,7 +8758,8 @@
         -9.129467628571428,
         38.71035414285715
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073528,
@@ -8608,7 +8803,8 @@
         -9.129604975,
         38.710310025000005
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073529,
@@ -8640,7 +8836,8 @@
         -9.12937286,
         38.71029205999999
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073530,
@@ -8672,7 +8869,8 @@
         -9.12932186,
         38.710306179999996
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "overture"
     },
     {
       "id": 1280073531,
@@ -8712,7 +8910,8 @@
         -9.129107871428571,
         38.7103706
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073532,
@@ -8760,7 +8959,8 @@
         -9.129034155555555,
         38.71042631111111
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073533,
@@ -8800,7 +9000,8 @@
         -9.128979157142856,
         38.710463028571425
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073534,
@@ -8840,7 +9041,8 @@
         -9.12890362857143,
         38.71052185714286
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073536,
@@ -8880,7 +9082,8 @@
         -9.129023042857142,
         38.71062397142857
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073537,
@@ -8916,7 +9119,8 @@
         -9.129133683333333,
         38.71070025
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073538,
@@ -8952,7 +9156,8 @@
         -9.129189916666666,
         38.7106768
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073539,
@@ -9000,7 +9205,8 @@
         -9.129258822222221,
         38.710620255555554
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073540,
@@ -9056,7 +9262,8 @@
         -9.129125018181819,
         38.710597754545454
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073541,
@@ -9104,7 +9311,8 @@
         -9.129030100000001,
         38.710729199999996
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073542,
@@ -9136,7 +9344,8 @@
         -9.128917580000001,
         38.71082516
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073543,
@@ -9168,7 +9377,8 @@
         -9.12895662,
         38.71085823999999
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073544,
@@ -9208,7 +9418,8 @@
         -9.128888842857142,
         38.71079461428572
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073545,
@@ -9256,7 +9467,8 @@
         -9.128967166666667,
         38.71079113333334
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073546,
@@ -9292,7 +9504,8 @@
         -9.1293881,
         38.710897683333336
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073547,
@@ -9328,7 +9541,8 @@
         -9.129281316666665,
         38.71089118333333
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073548,
@@ -9360,7 +9574,8 @@
         -9.129434700000001,
         38.71077578
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073549,
@@ -9400,7 +9615,8 @@
         -9.1293216,
         38.710748828571425
       ],
-      "type": "apartments"
+      "type": "apartments",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073550,
@@ -9452,7 +9668,8 @@
         -9.129601179999998,
         38.7109471
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073551,
@@ -9488,7 +9705,8 @@
         -9.129795,
         38.71084
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073552,
@@ -9524,7 +9742,8 @@
         -9.129708083333332,
         38.7108941
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073553,
@@ -9560,7 +9779,8 @@
         -9.129628733333332,
         38.71083931666667
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073554,
@@ -9592,7 +9812,8 @@
         -9.12956002,
         38.710849259999996
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073555,
@@ -9632,7 +9853,8 @@
         -9.129474957142858,
         38.710812257142855
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073556,
@@ -9676,7 +9898,8 @@
         -9.129836325,
         38.710454625
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073557,
@@ -9712,7 +9935,8 @@
         -9.130106483333334,
         38.71052476666667
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073558,
@@ -9748,7 +9972,8 @@
         -9.1300476,
         38.71062065
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073559,
@@ -9796,7 +10021,8 @@
         -9.130132633333332,
         38.71064417777778
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073561,
@@ -9832,7 +10058,8 @@
         -9.129776983333334,
         38.71105626666667
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073562,
@@ -9864,7 +10091,8 @@
         -9.130126059999998,
         38.71115122
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073563,
@@ -9896,7 +10124,8 @@
         -9.13011632,
         38.7110624
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073564,
@@ -9936,7 +10165,8 @@
         -9.130108957142857,
         38.7112079
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073565,
@@ -9972,7 +10202,8 @@
         -9.1303532,
         38.71108663333333
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073566,
@@ -10040,7 +10271,8 @@
         -9.130269328571428,
         38.71131018571429
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073567,
@@ -10088,7 +10320,8 @@
         -9.130191188888888,
         38.71073002222222
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073568,
@@ -10136,7 +10369,8 @@
         -9.130004744444443,
         38.71051784444445
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073569,
@@ -10176,7 +10410,8 @@
         -9.129999371428571,
         38.710847785714286
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073570,
@@ -10208,7 +10443,8 @@
         -9.129999880000002,
         38.71073596
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073571,
@@ -10256,7 +10492,8 @@
         -9.129935155555554,
         38.71045421111111
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1280073572,
@@ -10288,7 +10525,8 @@
         -9.12980364,
         38.7114359
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1280073573,
@@ -10320,7 +10558,8 @@
         -9.12982572,
         38.71135336
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1297779357,
@@ -10352,7 +10591,8 @@
         -9.12980404,
         38.709937260000004
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "default-estimate"
     },
     {
       "id": 1297779358,
@@ -10392,7 +10632,8 @@
         -9.130248385714285,
         38.709484228571434
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "overture"
     },
     {
       "id": 1415390713,
@@ -10424,7 +10665,8 @@
         -9.13054224,
         38.70992878
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1415390714,
@@ -10512,7 +10754,8 @@
         -9.13180402631579,
         38.70978593684211
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1415390715,
@@ -10552,7 +10795,8 @@
         -9.131774585714286,
         38.7098037
       ],
-      "type": "shed"
+      "type": "shed",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1415390716,
@@ -10584,7 +10828,8 @@
         -9.13177364,
         38.70977724000001
       ],
-      "type": "shed"
+      "type": "shed",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1416189221,
@@ -10616,7 +10861,8 @@
         -9.13110842,
         38.71006382
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1416189222,
@@ -10648,7 +10894,8 @@
         -9.13124492,
         38.71008438
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     },
     {
       "id": 1435675123,
@@ -10684,7 +10931,8 @@
         -9.131618933333334,
         38.709238066666664
       ],
-      "type": "yes"
+      "type": "yes",
+      "heightSource": "osm-levels"
     }
   ]
 }

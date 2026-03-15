@@ -8,6 +8,7 @@
 
 import * as fs from "fs";
 import * as path from "path";
+// Use terrace coordinates (not venue entrance) for building fetch
 
 interface OsmElement {
   type: string;
@@ -39,7 +40,7 @@ interface VenueBuildingData {
 const DEFAULT_HEIGHT = 15; // 5-story Lisbon default
 const METERS_PER_LEVEL = 3;
 const RADIUS_METERS = 150;
-const DELAY_MS = 1200; // Be nice to Overpass API
+const DELAY_MS = 2500; // Be nice to Overpass API
 
 const terracesPath = path.resolve(__dirname, "../data/terraces.json");
 const buildingsDir = path.resolve(__dirname, "../data/buildings");
@@ -144,11 +145,14 @@ async function main() {
     }
 
     try {
+      // Prefer explicit terrace point over venue entrance for better accuracy
+      const fetchLat = terrace.terraceLat ?? terrace.lat;
+      const fetchLng = terrace.terraceLng ?? terrace.lng;
       const data = await fetchBuildingsForVenue(
         terrace.id,
         terrace.name,
-        terrace.lat,
-        terrace.lng
+        fetchLat,
+        fetchLng
       );
       fs.writeFileSync(outPath, JSON.stringify(data, null, 2));
       console.log(`  [ok] ${terrace.name}: ${data.buildingCount} buildings`);

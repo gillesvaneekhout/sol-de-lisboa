@@ -1,9 +1,20 @@
 "use client";
 
-import type { TerraceWithStatus, BuildingInfo } from "@/types";
+import type { TerraceWithStatus, BuildingInfo, TerraceArchetype } from "@/types";
 import SunBadge from "./SunBadge";
 import { priceLevelString, formatTime, venueTypeIcon, formatTimeDiff } from "@/lib/utils";
 import { getTerraceStatus } from "@/lib/sunCalc";
+import { formatConfidenceLabel } from "@/lib/dataQuality";
+import { getArchetype } from "@/lib/archetypeHeuristics";
+
+const ARCHETYPE_LABEL: Record<TerraceArchetype, string> = {
+  rooftop: "🏙️ Rooftop",
+  miradouro: "🌅 Miradouro",
+  waterfront: "🌊 Waterfront",
+  courtyard: "🌿 Courtyard",
+  street: "🪑 Street",
+  unknown: "Terrace",
+};
 
 interface VenueSheetProps {
   venue: TerraceWithStatus;
@@ -100,6 +111,9 @@ export default function VenueSheet({
               {" · "}
               <span className="text-amber-400">★ {venue.rating}</span>
             </p>
+            <p className="text-xs text-neutral-500 mt-1">
+              {ARCHETYPE_LABEL[getArchetype(venue)]}
+            </p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <button
@@ -185,6 +199,50 @@ export default function VenueSheet({
               {tag}
             </span>
           ))}
+        </div>
+
+        <div className="mt-4 rounded-2xl border border-white/8 bg-white/[0.03] p-3">
+          <div className="flex items-center justify-between gap-3">
+            <h3 className="text-[11px] font-semibold uppercase tracking-widest text-neutral-500">
+              Data confidence
+            </h3>
+            <span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold ${
+              venue.quality.confidence === "high"
+                ? "bg-emerald-500/15 text-emerald-300"
+                : venue.quality.confidence === "medium"
+                ? "bg-amber-500/15 text-amber-300"
+                : "bg-rose-500/15 text-rose-300"
+            }`}>
+              {formatConfidenceLabel(venue.quality.confidence)}
+            </span>
+          </div>
+
+          <p className="mt-2 text-xs text-neutral-400">{venue.quality.summary}</p>
+
+          <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+            <div className="rounded-xl bg-white/5 p-2.5">
+              <div className="text-neutral-500">Venue coordinates</div>
+              <div className="mt-1 font-medium text-white">
+                {venue.quality.coordinateSource === "osm"
+                  ? "Matched from OSM"
+                  : venue.quality.coordinateSource === "curated"
+                  ? "Curated manually"
+                  : "Estimated"}
+              </div>
+            </div>
+            <div className="rounded-xl bg-white/5 p-2.5">
+              <div className="text-neutral-500">Height coverage</div>
+              <div className="mt-1 font-medium text-white">
+                {Math.round(venue.quality.heightCoverage * 100)}%
+              </div>
+            </div>
+            <div className="rounded-xl bg-white/5 p-2.5 col-span-2">
+              <div className="text-neutral-500">Nearby buildings with real height data</div>
+              <div className="mt-1 font-medium text-white">
+                {venue.quality.buildingsWithMeasuredHeight} of {venue.quality.totalBuildings}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

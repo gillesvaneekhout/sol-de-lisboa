@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
 import type { SortMode, TerraceWithStatus, FilterMode, BuildingInfo } from "@/types";
 import { getTerraceStatus, findNextSunnyTime, findSunEndTime } from "@/lib/sunCalc";
+import { getTerraceQuality } from "@/lib/dataQuality";
 import terraceData from "@/data/terraces.json";
 import type { Terrace } from "@/types";
 import TimeSlider from "@/components/TimeSlider";
@@ -105,6 +106,7 @@ export default function Home() {
         sunStatus,
         nextSunnyTime: sunStatus !== "sunny" ? findNextSunnyTime(t, selectedDate, buildings) : null,
         sunEndTime: sunStatus === "sunny" ? findSunEndTime(t, selectedDate, buildings) : null,
+        quality: getTerraceQuality(t, buildings),
       };
     });
   }, [selectedDate]);
