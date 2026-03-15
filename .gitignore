@@ -33,3 +33,6 @@ next-env.d.ts
 # LiDAR data (large GeoTIFF files)
 /data/mds-raw/
 /data/mds-venue/
+
+# Large research/temp data files
+/tmp/
