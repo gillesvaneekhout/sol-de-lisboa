@@ -1,0 +1,7 @@
+/data
+/tmp
+.next
+/out
+coverage
+test-results
+evals
