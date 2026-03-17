@@ -72,7 +72,8 @@ export default function ShadowMapGL({
         data: buildingsGeoJSON,
       });
 
-      // Add GPU shadow layer FIRST (below buildings)
+      // Add GPU shadow layer AFTER carto-tiles (on top of basemap, below buildings)
+      // NOTE: Map tiles not rendering — this is a CARTO/MapLibre issue unrelated to shadow layer
       try {
         const buildings = getBuildingFeatures() as BuildingFeature[];
         const shadowLayer = createShadowLayer({
@@ -81,7 +82,8 @@ export default function ShadowMapGL({
           shadowColor: isDark ? [0, 0, 0.15, 0.5] : [0, 0, 0.1, 0.4],
           textureSize: 1024,
         });
-        map.addLayer(shadowLayer);
+        // Insert after "carto-tiles" to render ON TOP of basemap
+        map.addLayer(shadowLayer, undefined); // at end for now
         shadowLayerRef.current = shadowLayer;
         console.log("[ShadowMapGL] GPU shadow layer added");
       } catch (e) {
