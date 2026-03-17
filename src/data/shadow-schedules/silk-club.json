@@ -2,15 +2,16 @@
   "venueId": "silk-club",
   "lat": 38.7113833,
   "lng": -9.1427573,
+  "archetype": "rooftop",
   "elevationMsl": 73.7,
-  "observerElevation": 74.7,
-  "computedAt": "2026-03-14",
+  "observerElevation": 82.4,
+  "computedAt": "2026-03-17",
   "schedule": {
     "1": {
       "7": "below_horizon",
-      "8": "shade",
-      "9": "shade",
-      "10": "shade",
+      "8": "sun",
+      "9": "sun",
+      "10": "sun",
       "11": "sun",
       "12": "sun",
       "13": "sun",
@@ -25,9 +26,9 @@
     },
     "2": {
       "7": "below_horizon",
-      "8": "shade",
-      "9": "shade",
-      "10": "shade",
+      "8": "sun",
+      "9": "sun",
+      "10": "sun",
       "11": "sun",
       "12": "sun",
       "13": "sun",
@@ -42,8 +43,8 @@
     },
     "3": {
       "7": "shade",
-      "8": "shade",
-      "9": "shade",
+      "8": "sun",
+      "9": "sun",
       "10": "sun",
       "11": "sun",
       "12": "sun",
@@ -59,8 +60,8 @@
     },
     "4": {
       "7": "below_horizon",
-      "8": "shade",
-      "9": "shade",
+      "8": "sun",
+      "9": "sun",
       "10": "sun",
       "11": "sun",
       "12": "sun",
@@ -75,8 +76,8 @@
       "21": "below_horizon"
     },
     "5": {
-      "7": "shade",
-      "8": "shade",
+      "7": "sun",
+      "8": "sun",
       "9": "sun",
       "10": "sun",
       "11": "sun",
@@ -92,8 +93,8 @@
       "21": "below_horizon"
     },
     "6": {
-      "7": "shade",
-      "8": "shade",
+      "7": "sun",
+      "8": "sun",
       "9": "sun",
       "10": "sun",
       "11": "sun",
@@ -109,8 +110,8 @@
       "21": "shade"
     },
     "7": {
-      "7": "shade",
-      "8": "shade",
+      "7": "sun",
+      "8": "sun",
       "9": "sun",
       "10": "sun",
       "11": "sun",
@@ -127,8 +128,8 @@
     },
     "8": {
       "7": "shade",
-      "8": "shade",
-      "9": "shade",
+      "8": "sun",
+      "9": "sun",
       "10": "sun",
       "11": "sun",
       "12": "sun",
@@ -144,9 +145,9 @@
     },
     "9": {
       "7": "below_horizon",
-      "8": "shade",
-      "9": "shade",
-      "10": "shade",
+      "8": "sun",
+      "9": "sun",
+      "10": "sun",
       "11": "sun",
       "12": "sun",
       "13": "sun",
@@ -161,9 +162,9 @@
     },
     "10": {
       "7": "below_horizon",
-      "8": "shade",
-      "9": "shade",
-      "10": "shade",
+      "8": "sun",
+      "9": "sun",
+      "10": "sun",
       "11": "sun",
       "12": "sun",
       "13": "sun",
@@ -178,8 +179,8 @@
     },
     "11": {
       "7": "below_horizon",
-      "8": "shade",
-      "9": "shade",
+      "8": "sun",
+      "9": "sun",
       "10": "sun",
       "11": "sun",
       "12": "sun",
@@ -195,9 +196,9 @@
     },
     "12": {
       "7": "below_horizon",
-      "8": "shade",
-      "9": "shade",
-      "10": "shade",
+      "8": "sun",
+      "9": "sun",
+      "10": "sun",
       "11": "sun",
       "12": "sun",
       "13": "sun",
@@ -210,5 +211,6 @@
       "20": "below_horizon",
       "21": "below_horizon"
     }
-  }
+  },
+  "maxLocalElevation": 81.4
 }

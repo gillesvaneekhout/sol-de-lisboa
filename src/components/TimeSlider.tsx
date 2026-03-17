@@ -5,6 +5,8 @@ interface TimeSliderProps {
   onChange: (minutes: number) => void;
   sunnyCount: number;
   onNow: () => void;
+  date?: Date;
+  onDateChange?: (date: Date) => void;
 }
 
 function minutesToTime(minutes: number): string {
@@ -13,41 +15,107 @@ function minutesToTime(minutes: number): string {
   return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
 }
 
-export default function TimeSlider({ value, onChange, sunnyCount, onNow }: TimeSliderProps) {
+function formatDateShort(date: Date): string {
+  return date.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function isToday(date: Date): boolean {
+  const today = new Date();
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
+  );
+}
+
+export default function TimeSlider({
+  value,
+  onChange,
+  sunnyCount,
+  onNow,
+  date,
+  onDateChange,
+}: TimeSliderProps) {
   const minMinutes = 8 * 60;
   const maxMinutes = 22 * 60;
 
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onDateChange && e.target.value) {
+      onDateChange(new Date(e.target.value + "T12:00:00"));
+    }
+  };
+
+  const handleToday = () => {
+    if (onDateChange) {
+      onDateChange(new Date());
+    }
+  };
+
   return (
-    <div className="w-full">
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-[11px] text-neutral-500 font-medium">08:00</span>
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-neutral-400">
-            {sunnyCount} sunny at
-          </span>
-          <span className="text-sm font-bold text-amber-400 tabular-nums tracking-tight">
-            {minutesToTime(value)}
-          </span>
-          <button
-            onClick={onNow}
-            className="rounded-full bg-amber-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-amber-400 hover:bg-amber-500/25 transition-colors"
-          >
-            Now
-          </button>
+    <div className="w-full space-y-3">
+      {/* Time display and slider */}
+      <div>
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-lg">☀️</span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-neutral-400">{sunnyCount} sunny at</span>
+            <span className="text-xl font-bold text-amber-400 tabular-nums tracking-tight">
+              {minutesToTime(value)}
+            </span>
+            <button
+              onClick={onNow}
+              className="rounded-full bg-amber-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-amber-400 hover:bg-amber-500/25 transition-colors"
+            >
+              Now
+            </button>
+          </div>
+          <span className="text-lg">🌙</span>
         </div>
-        <span className="text-[11px] text-neutral-500 font-medium">22:00</span>
+        <input
+          type="range"
+          min={minMinutes}
+          max={maxMinutes}
+          step={15}
+          value={value}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className="w-full h-2 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+          aria-label="Time of day"
+          data-testid="time-slider"
+        />
+        {/* Hour markers */}
+        <div className="flex justify-between text-[10px] text-neutral-500 mt-1 px-1">
+          <span>8:00</span>
+          <span>12:00</span>
+          <span>16:00</span>
+          <span>20:00</span>
+        </div>
       </div>
-      <input
-        type="range"
-        min={minMinutes}
-        max={maxMinutes}
-        step={15}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full"
-        aria-label="Time of day"
-        data-testid="time-slider"
-      />
+
+      {/* Date picker (optional) */}
+      {date && onDateChange && (
+        <div className="flex items-center justify-center gap-2 pt-1 border-t border-neutral-800">
+          <span className="text-sm">📅</span>
+          <input
+            type="date"
+            value={date.toISOString().split("T")[0]}
+            onChange={handleDateChange}
+            className="bg-neutral-800 text-white text-sm px-2 py-1 rounded border border-neutral-700 focus:border-amber-500 focus:outline-none"
+          />
+          {!isToday(date) && (
+            <button
+              onClick={handleToday}
+              className="rounded bg-neutral-700 px-2 py-1 text-xs text-neutral-300 hover:bg-neutral-600 transition-colors"
+            >
+              Today
+            </button>
+          )}
+          <span className="text-xs text-neutral-500">{formatDateShort(date)}</span>
+        </div>
+      )}
     </div>
   );
 }

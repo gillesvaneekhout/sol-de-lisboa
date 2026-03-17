@@ -2,9 +2,10 @@
   "venueId": "bar-da-fabrica",
   "lat": 38.7034979,
   "lng": -9.178873,
+  "archetype": "rooftop",
   "elevationMsl": 16.0,
-  "observerElevation": 17.0,
-  "computedAt": "2026-03-14",
+  "observerElevation": 19.2,
+  "computedAt": "2026-03-17",
   "schedule": {
     "1": {
       "7": "below_horizon",
@@ -109,7 +110,7 @@
       "21": "sun"
     },
     "7": {
-      "7": "shade",
+      "7": "sun",
       "8": "sun",
       "9": "sun",
       "10": "sun",
@@ -127,7 +128,7 @@
     },
     "8": {
       "7": "shade",
-      "8": "shade",
+      "8": "sun",
       "9": "sun",
       "10": "sun",
       "11": "sun",
@@ -210,5 +211,6 @@
       "20": "below_horizon",
       "21": "below_horizon"
     }
-  }
+  },
+  "maxLocalElevation": 18.2
 }

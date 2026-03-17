@@ -182,15 +182,32 @@ def crop_venue_elevation(venue: dict) -> Path:
     return crop_path
 
 
-def get_observer_height(venue: dict, elevation_at_point: float) -> float:
+def get_observer_height(venue: dict, elevation_at_point: float, max_local_elevation: float = None) -> float:
     """Get the observer elevation (absolute, in meters above sea level).
-    Uses terraceFloor if set, otherwise MDS elevation + 1m (ground floor assumption)."""
+    
+    For rooftop/miradouro terraces, uses max elevation in 10m radius to avoid
+    self-shadowing from the building's own higher sections.
+    
+    Args:
+        venue: Venue dict with archetype, terraceFloor, etc.
+        elevation_at_point: MDS elevation at the exact venue coordinate
+        max_local_elevation: Max elevation in ~10m radius (for rooftop handling)
+    """
+    archetype = venue.get("archetype", "")
     floor = venue.get("terraceFloor")
+    
+    # For rooftop and miradouro terraces, use the local maximum elevation
+    # This prevents self-shadowing from the building's own higher sections
+    if archetype in ("rooftop", "miradouro") and max_local_elevation is not None:
+        # Use max local elevation + 1m (standing on rooftop)
+        return max_local_elevation + 1.0
+    
     if floor is not None:
         # terraceFloor is the floor number (0=ground, 1=first, etc.)
         # Estimate ~3m per floor above ground elevation
         # But we need ground elevation — MDS includes the building, so we use a rough estimate
         return elevation_at_point + floor * 3.0
+    
     # No floor info: assume observer is at MDS elevation + 1m (standing on ground/terrace)
     return elevation_at_point + 1.0
 
@@ -255,6 +272,7 @@ def compute_shadow_schedule(venue: dict) -> dict:
     vid = venue["id"]
     lat = venue.get("terraceLat", venue["lat"])
     lng = venue.get("terraceLng", venue["lng"])
+    archetype = venue.get("archetype", "")
 
     # Step 1: crop elevation
     crop_path = crop_venue_elevation(venue)
@@ -274,7 +292,21 @@ def compute_shadow_schedule(venue: dict) -> dict:
         else:
             venue_elev = 50.0
 
-    observer_elev = get_observer_height(venue, venue_elev)
+        # For rooftop/miradouro: compute max elevation in 10m radius
+        # This captures the building's actual rooftop height
+        max_local_elev = None
+        if archetype in ("rooftop", "miradouro"):
+            radius_px = int(10 / 0.5)  # 10m at 0.5m resolution = 20 pixels
+            r1 = max(0, row - radius_px)
+            r2 = min(data.shape[0], row + radius_px + 1)
+            c1 = max(0, col - radius_px)
+            c2 = min(data.shape[1], col + radius_px + 1)
+            patch = data[r1:r2, c1:c2]
+            valid = patch[patch != NODATA]
+            if len(valid) > 0:
+                max_local_elev = float(valid.max())
+
+    observer_elev = get_observer_height(venue, venue_elev, max_local_elev)
 
     # Step 3: compute for each month × hour using pre-loaded elevation data
     schedule = {}
@@ -298,15 +330,19 @@ def compute_shadow_schedule(venue: dict) -> dict:
 
         schedule[str(month)] = month_schedule
 
-    return {
+    result = {
         "venueId": vid,
         "lat": lat,
         "lng": lng,
+        "archetype": archetype or None,
         "elevationMsl": round(venue_elev, 1),
         "observerElevation": round(observer_elev, 1),
         "computedAt": datetime.now().strftime("%Y-%m-%d"),
         "schedule": schedule,
     }
+    if max_local_elev is not None:
+        result["maxLocalElevation"] = round(max_local_elev, 1)
+    return result
 
 
 def process_venue(venue: dict) -> str:

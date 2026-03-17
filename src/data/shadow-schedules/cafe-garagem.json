@@ -2,9 +2,10 @@
   "venueId": "cafe-garagem",
   "lat": 38.7149,
   "lng": -9.1326,
+  "archetype": "miradouro",
   "elevationMsl": 78.1,
-  "observerElevation": 79.1,
-  "computedAt": "2026-03-14",
+  "observerElevation": 80.9,
+  "computedAt": "2026-03-17",
   "schedule": {
     "1": {
       "7": "below_horizon",
@@ -161,7 +162,7 @@
     },
     "10": {
       "7": "below_horizon",
-      "8": "shade",
+      "8": "sun",
       "9": "sun",
       "10": "sun",
       "11": "sun",
@@ -196,7 +197,7 @@
     "12": {
       "7": "below_horizon",
       "8": "sun",
-      "9": "shade",
+      "9": "sun",
       "10": "sun",
       "11": "sun",
       "12": "sun",
@@ -210,5 +211,6 @@
       "20": "below_horizon",
       "21": "below_horizon"
     }
-  }
+  },
+  "maxLocalElevation": 79.9
 }

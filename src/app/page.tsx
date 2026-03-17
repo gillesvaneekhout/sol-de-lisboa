@@ -11,11 +11,22 @@ import TimeSlider from "@/components/TimeSlider";
 import ListView from "@/components/ListView";
 import VenueSheet from "@/components/VenueSheet";
 
+// Old Leaflet map (backup)
 const MapView = dynamic(() => import("@/components/MapView"), {
   ssr: false,
   loading: () => (
     <div className="flex h-full items-center justify-center bg-[#0f0f0f]">
       <div className="animate-pulse text-neutral-600">Loading map...</div>
+    </div>
+  ),
+});
+
+// MapLibre GL map with GPU shadow visualization
+const ShadowMapGL = dynamic(() => import("@/components/ShadowMapGL"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full items-center justify-center bg-[#0f0f0f]">
+      <div className="animate-pulse text-neutral-600">Loading GPU shadow map...</div>
     </div>
   ),
 });
@@ -39,6 +50,9 @@ function getCurrentMinutes(): number {
 }
 
 const FAVORITES_KEY = "sol-de-lisboa-favorites";
+
+// Toggle to use new shadow map or classic map
+const USE_SHADOW_MAP = true;
 
 function loadFavorites(): Set<string> {
   if (typeof window === "undefined") return new Set();
@@ -66,6 +80,7 @@ const filterOptions: { value: FilterMode; label: string }[] = [
 export default function Home() {
   const [view, setView] = useState<"map" | "list">("map");
   const [timeMinutes, setTimeMinutes] = useState(getCurrentMinutes);
+  const [selectedDate, setSelectedDate] = useState<Date>(() => new Date());
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [sortMode, setSortMode] = useState<SortMode>("sunny_now");
   const [filterMode, setFilterMode] = useState<FilterMode>("all");
@@ -92,24 +107,25 @@ export default function Home() {
     setTimeMinutes(getCurrentMinutes());
   }, []);
 
-  const selectedDate = useMemo(
-    () => getTimeFromMinutes(timeMinutes, new Date()),
-    [timeMinutes]
+  // Combine selected date with time slider
+  const selectedDateTime = useMemo(
+    () => getTimeFromMinutes(timeMinutes, selectedDate),
+    [timeMinutes, selectedDate]
   );
 
   const terracesWithStatus: TerraceWithStatus[] = useMemo(() => {
     return terraces.map((t) => {
       const buildings = buildingData[t.id];
-      const sunStatus = getTerraceStatus(t, selectedDate, buildings);
+      const sunStatus = getTerraceStatus(t, selectedDateTime, buildings);
       return {
         ...t,
         sunStatus,
-        nextSunnyTime: sunStatus !== "sunny" ? findNextSunnyTime(t, selectedDate, buildings) : null,
-        sunEndTime: sunStatus === "sunny" ? findSunEndTime(t, selectedDate, buildings) : null,
+        nextSunnyTime: sunStatus !== "sunny" ? findNextSunnyTime(t, selectedDateTime, buildings) : null,
+        sunEndTime: sunStatus === "sunny" ? findSunEndTime(t, selectedDateTime, buildings) : null,
         quality: getTerraceQuality(t, buildings),
       };
     });
-  }, [selectedDate]);
+  }, [selectedDateTime]);
 
   const filteredTerraces = useMemo(() => {
     if (filterMode === "all") return terracesWithStatus;
@@ -139,12 +155,22 @@ export default function Home() {
       {/* Full-screen content layer */}
       <div className="absolute inset-0">
         {view === "map" ? (
-          <MapView
-            terraces={filteredTerraces}
-            onSelectVenue={handleSelectVenue}
-            selectedId={selectedId}
-            favorites={favorites}
-          />
+          USE_SHADOW_MAP ? (
+            <ShadowMapGL
+              terraces={filteredTerraces}
+              selectedTime={selectedDateTime}
+              onSelectVenue={handleSelectVenue}
+              selectedId={selectedId}
+              favorites={favorites}
+            />
+          ) : (
+            <MapView
+              terraces={filteredTerraces}
+              onSelectVenue={handleSelectVenue}
+              selectedId={selectedId}
+              favorites={favorites}
+            />
+          )
         ) : (
           <div className="h-full pt-28 pb-24">
             <ListView
@@ -231,6 +257,8 @@ export default function Home() {
             onChange={setTimeMinutes}
             sunnyCount={sunnyCount}
             onNow={handleNow}
+            date={selectedDate}
+            onDateChange={setSelectedDate}
           />
         </div>
       </div>
@@ -244,7 +272,7 @@ export default function Home() {
           />
           <VenueSheet
             venue={selectedVenue}
-            selectedDate={selectedDate}
+            selectedDate={selectedDateTime}
             onClose={handleCloseSheet}
             isFavorite={favorites.has(selectedVenue.id)}
             onToggleFavorite={() => toggleFavorite(selectedVenue.id)}

@@ -2,9 +2,10 @@
   "venueId": "faz-figura",
   "lat": 38.7141,
   "lng": -9.1268,
+  "archetype": "miradouro",
   "elevationMsl": 66.7,
-  "observerElevation": 67.7,
-  "computedAt": "2026-03-14",
+  "observerElevation": 74.0,
+  "computedAt": "2026-03-17",
   "schedule": {
     "1": {
       "7": "below_horizon",
@@ -17,7 +18,7 @@
       "14": "sun",
       "15": "sun",
       "16": "sun",
-      "17": "shade",
+      "17": "sun",
       "18": "below_horizon",
       "19": "below_horizon",
       "20": "below_horizon",
@@ -34,7 +35,7 @@
       "14": "sun",
       "15": "sun",
       "16": "sun",
-      "17": "shade",
+      "17": "sun",
       "18": "shade",
       "19": "below_horizon",
       "20": "below_horizon",
@@ -51,8 +52,8 @@
       "14": "sun",
       "15": "sun",
       "16": "sun",
-      "17": "shade",
-      "18": "shade",
+      "17": "sun",
+      "18": "sun",
       "19": "below_horizon",
       "20": "below_horizon",
       "21": "below_horizon"
@@ -70,7 +71,7 @@
       "16": "sun",
       "17": "sun",
       "18": "sun",
-      "19": "shade",
+      "19": "sun",
       "20": "shade",
       "21": "below_horizon"
     },
@@ -87,7 +88,7 @@
       "16": "sun",
       "17": "sun",
       "18": "sun",
-      "19": "shade",
+      "19": "sun",
       "20": "shade",
       "21": "below_horizon"
     },
@@ -104,8 +105,8 @@
       "16": "sun",
       "17": "sun",
       "18": "sun",
-      "19": "shade",
-      "20": "shade",
+      "19": "sun",
+      "20": "sun",
       "21": "shade"
     },
     "7": {
@@ -121,8 +122,8 @@
       "16": "sun",
       "17": "sun",
       "18": "sun",
-      "19": "shade",
-      "20": "shade",
+      "19": "sun",
+      "20": "sun",
       "21": "below_horizon"
     },
     "8": {
@@ -138,7 +139,7 @@
       "16": "sun",
       "17": "sun",
       "18": "sun",
-      "19": "shade",
+      "19": "sun",
       "20": "shade",
       "21": "below_horizon"
     },
@@ -155,7 +156,7 @@
       "16": "sun",
       "17": "sun",
       "18": "sun",
-      "19": "shade",
+      "19": "sun",
       "20": "below_horizon",
       "21": "below_horizon"
     },
@@ -171,7 +172,7 @@
       "15": "sun",
       "16": "sun",
       "17": "sun",
-      "18": "shade",
+      "18": "sun",
       "19": "below_horizon",
       "20": "below_horizon",
       "21": "below_horizon"
@@ -210,5 +211,6 @@
       "20": "below_horizon",
       "21": "below_horizon"
     }
-  }
+  },
+  "maxLocalElevation": 73.0
 }
