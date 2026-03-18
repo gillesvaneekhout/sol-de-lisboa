@@ -77,7 +77,7 @@ export default function ShadowMapGL({
         date: selectedTime,
         bounds: mapBounds,
         zoom: map.getZoom(),
-        shadowColor: isDark ? [0, 0, 0.05, 0.6] : [0, 0, 0.05, 0.45],
+        shadowColor: isDark ? [0, 0, 0.1, 0.65] : [0, 0, 0.15, 0.7],
         textureSize: 1024,
       });
 

@@ -196,7 +196,7 @@ export default function Home() {
               <h1 className="text-sm font-bold text-white tracking-tight">
                 Sol de Lisboa
               </h1>
-              <p className="text-[11px] text-neutral-400">
+              <p className="text-[11px] text-neutral-400" suppressHydrationWarning>
                 {sunnyCount} sunny terrace{sunnyCount !== 1 ? "s" : ""} now
               </p>
             </div>
