@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, AnimatePresence } from "framer-motion";
 import type { TerraceWithStatus, BuildingInfo, TerraceArchetype } from "@/types";
 import SunBadge from "./SunBadge";
 import { priceLevelString, formatTime, venueTypeIcon, formatTimeDiff } from "@/lib/utils";
@@ -92,10 +93,32 @@ export default function VenueSheet({
   ));
 
   return (
-    <div className="bottom-sheet fixed inset-x-0 bottom-0 z-[1000] max-h-[75vh] overflow-y-auto rounded-t-[24px] bg-[#1a1a1a] border-t border-white/[0.06] shadow-2xl">
+    <motion.div
+      className="bottom-sheet fixed inset-x-0 bottom-0 z-[1000] max-h-[75vh] overflow-y-auto rounded-t-[24px] bg-[#1a1a1a] border-t border-white/[0.06] shadow-2xl"
+      initial={{ y: "100%" }}
+      animate={{ y: 0 }}
+      exit={{ y: "100%" }}
+      transition={{ 
+        type: "spring", 
+        damping: 30, 
+        stiffness: 300,
+        mass: 0.8
+      }}
+      drag="y"
+      dragConstraints={{ top: 0, bottom: 0 }}
+      dragElastic={0.2}
+      onDragEnd={(_, info) => {
+        if (info.offset.y > 100 || info.velocity.y > 500) {
+          onClose();
+        }
+      }}
+    >
       {/* Handle */}
-      <div className="sticky top-0 z-10 flex justify-center pt-3 pb-1 bg-[#1a1a1a] rounded-t-[24px]">
-        <div className="h-1 w-10 rounded-full bg-neutral-700" />
+      <div className="sticky top-0 z-10 flex justify-center pt-3 pb-1 bg-[#1a1a1a] rounded-t-[24px] cursor-grab active:cursor-grabbing">
+        <motion.div 
+          className="h-1 w-10 rounded-full bg-neutral-700"
+          whileHover={{ scale: 1.1, backgroundColor: "#525252" }}
+        />
       </div>
 
       {/* Header */}
@@ -245,6 +268,6 @@ export default function VenueSheet({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

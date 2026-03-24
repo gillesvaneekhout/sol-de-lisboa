@@ -22,6 +22,7 @@
     "@turf/turf": "^7.3.4",
     "@types/earcut": "^3.0.0",
     "earcut": "^3.0.2",
+    "framer-motion": "^12.38.0",
     "leaflet": "^1.9.4",
     "maplibre-gl": "^5.20.1",
     "next": "14.2.21",

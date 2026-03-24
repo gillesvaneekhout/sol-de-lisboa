@@ -7,6 +7,7 @@ import { getTerraceStatus, findNextSunnyTime, findSunEndTime } from "@/lib/sunCa
 import { getTerraceQuality } from "@/lib/dataQuality";
 import terraceData from "@/data/terraces.json";
 import type { Terrace } from "@/types";
+import { AnimatePresence, motion } from "framer-motion";
 import TimeSlider from "@/components/TimeSlider";
 import ListView from "@/components/ListView";
 import VenueSheet from "@/components/VenueSheet";
@@ -264,22 +265,28 @@ export default function Home() {
       </div>
 
       {/* Venue bottom sheet */}
-      {selectedVenue && (
-        <>
-          <div
-            className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm"
-            onClick={handleCloseSheet}
-          />
-          <VenueSheet
-            venue={selectedVenue}
-            selectedDate={selectedDateTime}
-            onClose={handleCloseSheet}
-            isFavorite={favorites.has(selectedVenue.id)}
-            onToggleFavorite={() => toggleFavorite(selectedVenue.id)}
-            buildings={buildingData[selectedVenue.id]}
-          />
-        </>
-      )}
+      <AnimatePresence>
+        {selectedVenue && (
+          <>
+            <motion.div
+              className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm"
+              onClick={handleCloseSheet}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            />
+            <VenueSheet
+              venue={selectedVenue}
+              selectedDate={selectedDateTime}
+              onClose={handleCloseSheet}
+              isFavorite={favorites.has(selectedVenue.id)}
+              onToggleFavorite={() => toggleFavorite(selectedVenue.id)}
+              buildings={buildingData[selectedVenue.id]}
+            />
+          </>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
