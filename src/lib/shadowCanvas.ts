@@ -367,9 +367,11 @@ export function createShadowCanvas(options: ShadowCanvasOptions): ShadowCanvas |
       const [r, g] = encodeHeight(height);
 
       // Transform lng/lat to [0,1] texture coords
+      // Note: Y must be flipped to match Web Mercator convention (north = top = Y=0)
+      // The shader expects topY (maxLat) at texY=0 and botY (minLat) at texY=1
       const texCoords: [number, number][] = coords.map(([lng, lat]) => [
         (lng - minLng) / lngSpan,
-        (lat - minLat) / latSpan,
+        (maxLat - lat) / latSpan,  // Flipped: maxLat→0, minLat→1
       ]);
 
       try {
@@ -416,6 +418,17 @@ export function createShadowCanvas(options: ShadowCanvasOptions): ShadowCanvas |
     const Hi = (4.889714432387314 + 6.3003876824396166 * daysSinceJ2000 -
                Math.atan2(Math.sin(lambda) * Math.cos(OBLIQUITY), Math.cos(lambda)))
                % (2 * Math.PI) + 2 * Math.PI;
+
+    // Debug: compute sun position at viewport center for verification
+    const RAD = Math.PI / 180;
+    const centerLatRad = centerLat * RAD;
+    const centerLngRad = centerLng * RAD;
+    let H_center = (Hi - (-centerLngRad)) % (2 * Math.PI);
+    if (H_center < 0) H_center += 2 * Math.PI;
+    const sunAzRaw = Math.atan2(Math.sin(H_center), Math.cos(H_center) * Math.sin(centerLatRad) - Math.tan(dec) * Math.cos(centerLatRad));
+    const sunAlt = Math.asin(Math.sin(centerLatRad) * Math.sin(dec) + Math.cos(centerLatRad) * Math.cos(dec) * Math.cos(H_center));
+    const sunAzCompass = ((sunAzRaw * 180 / Math.PI) + 180 + 360) % 360;
+    console.log(`[ShadowCanvas] Sun: az=${sunAzCompass.toFixed(1)}°, alt=${(sunAlt * 180 / Math.PI).toFixed(1)}° | bounds: [${minLng.toFixed(3)},${minLat.toFixed(3)}]-[${maxLng.toFixed(3)},${maxLat.toFixed(3)}]`);
 
     // Web Mercator Y coordinates for the bounds
     const toMercatorY = (lat: number) =>
