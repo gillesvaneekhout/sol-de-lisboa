@@ -50,6 +50,12 @@ function getCurrentMinutes(): number {
   return Math.max(8 * 60, Math.min(22 * 60, minutes));
 }
 
+function isOutsideHours(): boolean {
+  const now = new Date();
+  const hours = now.getHours();
+  return hours < 8 || hours >= 22;
+}
+
 const FAVORITES_KEY = "sol-de-lisboa-favorites";
 
 // Toggle to use new shadow map or classic map
@@ -86,9 +92,11 @@ export default function Home() {
   const [sortMode, setSortMode] = useState<SortMode>("sunny_now");
   const [filterMode, setFilterMode] = useState<FilterMode>("all");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [outsideHours, setOutsideHours] = useState(false);
 
   useEffect(() => {
     setFavorites(loadFavorites());
+    setOutsideHours(isOutsideHours());
   }, []);
 
   const toggleFavorite = useCallback((id: string) => {
@@ -198,7 +206,11 @@ export default function Home() {
                 Sol de Lisboa
               </h1>
               <p className="text-[11px] text-neutral-400" suppressHydrationWarning>
-                {sunnyCount} sunny terrace{sunnyCount !== 1 ? "s" : ""} now
+                {outsideHours ? (
+                  <span className="text-neutral-500">Terraces are closed</span>
+                ) : (
+                  <>{sunnyCount} sunny terrace{sunnyCount !== 1 ? "s" : ""} now</>
+                )}
               </p>
             </div>
           </div>
@@ -239,6 +251,8 @@ export default function Home() {
                 filterMode === opt.value
                   ? opt.value === "sunny"
                     ? "bg-amber-500 text-black shadow-lg shadow-amber-500/20"
+                    : opt.value === "all"
+                    ? "bg-white/20 text-white ring-1 ring-white/30"
                     : "bg-white/15 text-white"
                   : "glass text-neutral-400 hover:text-white active:scale-95"
               }`}
@@ -249,6 +263,18 @@ export default function Home() {
           ))}
         </div>
       </header>
+
+      {/* After-hours banner */}
+      {outsideHours && (
+        <div className="absolute left-4 right-4 top-[140px] z-[450]">
+          <div className="rounded-xl bg-neutral-800/90 backdrop-blur-md border border-neutral-700 px-4 py-3 text-center">
+            <p className="text-sm font-medium text-white">🌙 Terraces are closed now</p>
+            <p className="text-xs text-neutral-400 mt-1">
+              Use the time slider to plan your visit tomorrow
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Floating time slider - with safe area */}
       <div className="absolute bottom-4 left-4 right-4 z-[500] safe-bottom" data-testid="time-slider-container">
