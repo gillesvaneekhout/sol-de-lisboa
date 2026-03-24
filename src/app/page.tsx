@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
 import type { SortMode, TerraceWithStatus, FilterMode, BuildingInfo } from "@/types";
 import { getTerraceStatus, findNextSunnyTime, findSunEndTime } from "@/lib/sunCalc";
 import { getTerraceQuality } from "@/lib/dataQuality";
 import terraceData from "@/data/terraces.json";
 import type { Terrace } from "@/types";
-import { AnimatePresence, motion } from "framer-motion";
 import TimeSlider from "@/components/TimeSlider";
 import ListView from "@/components/ListView";
 import VenueSheet from "@/components/VenueSheet";
@@ -46,17 +45,8 @@ function getTimeFromMinutes(minutes: number, baseDate: Date): Date {
 
 function getCurrentMinutes(): number {
   const now = new Date();
-  const hours = now.getHours();
-  const minutes = hours * 60 + now.getMinutes();
-  // Outside hours: default to last valid hour (22:00) instead of jumping to 08:00
-  if (hours < 8 || hours >= 22) return 22 * 60;
+  const minutes = now.getHours() * 60 + now.getMinutes();
   return Math.max(8 * 60, Math.min(22 * 60, minutes));
-}
-
-function isOutsideHours(): boolean {
-  const now = new Date();
-  const hours = now.getHours();
-  return hours < 8 || hours >= 22;
 }
 
 const FAVORITES_KEY = "sol-de-lisboa-favorites";
@@ -95,33 +85,9 @@ export default function Home() {
   const [sortMode, setSortMode] = useState<SortMode>("sunny_now");
   const [filterMode, setFilterMode] = useState<FilterMode>("all");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
-  const [outsideHours, setOutsideHours] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const [headerHeight, setHeaderHeight] = useState(0);
-  const [sliderHeight, setSliderHeight] = useState(0);
 
   useEffect(() => {
     setFavorites(loadFavorites());
-    setOutsideHours(isOutsideHours());
-  }, []);
-
-  // Measure header and slider heights dynamically
-  useEffect(() => {
-    const headerEl = headerRef.current;
-    const sliderEl = sliderRef.current;
-    if (!headerEl || !sliderEl) return;
-
-    const ro = new ResizeObserver(() => {
-      setHeaderHeight(headerEl.getBoundingClientRect().height);
-      setSliderHeight(sliderEl.getBoundingClientRect().height);
-    });
-    ro.observe(headerEl);
-    ro.observe(sliderEl);
-    // Initial measurement
-    setHeaderHeight(headerEl.getBoundingClientRect().height);
-    setSliderHeight(sliderEl.getBoundingClientRect().height);
-    return () => ro.disconnect();
   }, []);
 
   const toggleFavorite = useCallback((id: string) => {
@@ -186,14 +152,8 @@ export default function Home() {
 
   return (
     <main className="relative h-[100dvh] w-full bg-[#0f0f0f]">
-      {/* Full-screen content layer — offset by header/slider heights */}
-      <div
-        className="absolute left-0 right-0"
-        style={{
-          top: headerHeight ? headerHeight + 16 : 0,
-          bottom: sliderHeight ? sliderHeight + 16 : 0,
-        }}
-      >
+      {/* Full-screen content layer */}
+      <div className="absolute inset-0">
         {view === "map" ? (
           USE_SHADOW_MAP ? (
             <ShadowMapGL
@@ -213,7 +173,7 @@ export default function Home() {
             />
           )
         ) : (
-          <div className="h-full">
+          <div className="h-full pt-28 pb-24">
             <ListView
               terraces={filteredTerraces}
               sortMode={sortMode}
@@ -227,7 +187,7 @@ export default function Home() {
       </div>
 
       {/* Floating header */}
-      <header ref={headerRef} className="absolute left-4 right-4 top-4 z-[500]">
+      <header className="absolute left-4 right-4 top-4 z-[500]">
         <div className="flex items-center justify-between rounded-2xl glass px-4 py-3">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/15">
@@ -238,11 +198,7 @@ export default function Home() {
                 Sol de Lisboa
               </h1>
               <p className="text-[11px] text-neutral-400" suppressHydrationWarning>
-                {outsideHours ? (
-                  <span className="text-neutral-500">Showing evening view</span>
-                ) : (
-                  <>{sunnyCount} sunny terrace{sunnyCount !== 1 ? "s" : ""} now</>
-                )}
+                {sunnyCount} sunny terrace{sunnyCount !== 1 ? "s" : ""} now
               </p>
             </div>
           </div>
@@ -251,7 +207,7 @@ export default function Home() {
             <button
               data-testid="view-map"
               onClick={() => setView("map")}
-              className={`rounded-lg px-5 py-2.5 text-xs font-semibold transition-all min-h-[44px] active:scale-95 ${
+              className={`rounded-lg px-4 py-1.5 text-xs font-semibold transition-all ${
                 view === "map"
                   ? "bg-amber-500 text-black shadow-lg shadow-amber-500/25"
                   : "text-neutral-400 hover:text-white"
@@ -262,7 +218,7 @@ export default function Home() {
             <button
               data-testid="view-list"
               onClick={() => setView("list")}
-              className={`rounded-lg px-5 py-2.5 text-xs font-semibold transition-all min-h-[44px] active:scale-95 ${
+              className={`rounded-lg px-4 py-1.5 text-xs font-semibold transition-all ${
                 view === "list"
                   ? "bg-amber-500 text-black shadow-lg shadow-amber-500/25"
                   : "text-neutral-400 hover:text-white"
@@ -274,19 +230,17 @@ export default function Home() {
         </div>
 
         {/* Filter pills */}
-        <div className="flex gap-1.5 overflow-x-auto mt-2 px-0 no-scrollbar scroll-smooth" style={{scrollSnapType: 'none'}} data-testid="filter-bar">
+        <div className="flex gap-2 overflow-x-auto mt-2 px-1 no-scrollbar" data-testid="filter-bar">
           {filterOptions.map((opt) => (
             <button
               key={opt.value}
               onClick={() => setFilterMode(opt.value)}
-              className={`whitespace-nowrap rounded-full px-4 py-2.5 text-xs font-semibold transition-all min-h-[44px] ${
+              className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition-all ${
                 filterMode === opt.value
                   ? opt.value === "sunny"
                     ? "bg-amber-500 text-black shadow-lg shadow-amber-500/20"
-                    : opt.value === "all"
-                    ? "bg-white/90 text-black font-bold shadow-lg"
                     : "bg-white/15 text-white"
-                  : "glass text-neutral-400 hover:text-white active:scale-95"
+                  : "glass text-neutral-400 hover:text-white"
               }`}
               data-testid={`filter-${opt.value}`}
             >
@@ -294,21 +248,11 @@ export default function Home() {
             </button>
           ))}
         </div>
-
-        {/* After-hours banner — inside header so it flows naturally */}
-        {outsideHours && (
-          <div className="mt-2 rounded-xl bg-neutral-800/90 backdrop-blur-md border border-neutral-700 px-4 py-3 text-center">
-            <p className="text-sm font-medium text-white">🌙 Sun has set for the day</p>
-            <p className="text-xs text-neutral-400 mt-1">
-              Showing evening view — use the slider to plan ahead
-            </p>
-          </div>
-        )}
       </header>
 
-      {/* Floating time slider - with safe area */}
-      <div ref={sliderRef} className="absolute bottom-4 left-4 right-4 z-[500] safe-bottom" data-testid="time-slider-container">
-        <div className="rounded-2xl glass px-4 py-4">
+      {/* Floating time slider */}
+      <div className="absolute bottom-4 left-4 right-4 z-[500]" data-testid="time-slider-container">
+        <div className="rounded-2xl glass px-4 py-3">
           <TimeSlider
             value={timeMinutes}
             onChange={setTimeMinutes}
@@ -321,28 +265,22 @@ export default function Home() {
       </div>
 
       {/* Venue bottom sheet */}
-      <AnimatePresence>
-        {selectedVenue && (
-          <>
-            <motion.div
-              className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm"
-              onClick={handleCloseSheet}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            />
-            <VenueSheet
-              venue={selectedVenue}
-              selectedDate={selectedDateTime}
-              onClose={handleCloseSheet}
-              isFavorite={favorites.has(selectedVenue.id)}
-              onToggleFavorite={() => toggleFavorite(selectedVenue.id)}
-              buildings={buildingData[selectedVenue.id]}
-            />
-          </>
-        )}
-      </AnimatePresence>
+      {selectedVenue && (
+        <>
+          <div
+            className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm"
+            onClick={handleCloseSheet}
+          />
+          <VenueSheet
+            venue={selectedVenue}
+            selectedDate={selectedDateTime}
+            onClose={handleCloseSheet}
+            isFavorite={favorites.has(selectedVenue.id)}
+            onToggleFavorite={() => toggleFavorite(selectedVenue.id)}
+            buildings={buildingData[selectedVenue.id]}
+          />
+        </>
+      )}
     </main>
   );
 }
