@@ -202,6 +202,7 @@ export default function Home() {
               onSelectVenue={handleSelectVenue}
               selectedId={selectedId}
               favorites={favorites}
+              theme="dark"
             />
           ) : (
             <MapView
@@ -273,7 +274,7 @@ export default function Home() {
         </div>
 
         {/* Filter pills */}
-        <div className="flex gap-2 overflow-x-auto mt-2 pl-0 pr-1 no-scrollbar" data-testid="filter-bar">
+        <div className="flex gap-2 overflow-x-auto mt-2 px-1 no-scrollbar" data-testid="filter-bar">
           {filterOptions.map((opt) => (
             <button
               key={opt.value}
