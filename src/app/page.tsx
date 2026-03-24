@@ -274,7 +274,7 @@ export default function Home() {
         </div>
 
         {/* Filter pills */}
-        <div className="flex gap-2 overflow-x-auto mt-2 px-1 no-scrollbar" data-testid="filter-bar">
+        <div className="flex gap-1.5 overflow-x-auto mt-2 px-0 no-scrollbar scroll-smooth" style={{scrollSnapType: 'none'}} data-testid="filter-bar">
           {filterOptions.map((opt) => (
             <button
               key={opt.value}
