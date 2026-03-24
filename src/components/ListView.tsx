@@ -95,7 +95,7 @@ export default function ListView({
             <button
               key={venue.id}
               onClick={() => onSelectVenue(venue.id)}
-              className="group w-full flex rounded-xl bg-[#1a1a1a] border border-[#2a2a2a] overflow-hidden text-left transition-all hover:bg-[#222] active:scale-[0.98]"
+              className="group w-full flex rounded-xl bg-neutral-900/80 border border-neutral-800 overflow-hidden text-left transition-all hover:bg-neutral-800/80 active:scale-[0.98]"
             >
               {/* Left color bar */}
               <div
