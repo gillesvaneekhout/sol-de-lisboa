@@ -375,6 +375,30 @@ export default function ShadowMapGL({
     if (!mapRef.current) return;
     const map = mapRef.current;
 
+    /** Reposition the shadow canvas source to match the current viewport bounds. */
+    const syncCoordinates = () => {
+      const src = map.getSource(SHADOW_CANVAS_SOURCE) as maplibregl.CanvasSource | undefined;
+      if (!src) return;
+      const bounds = map.getBounds();
+      const ne = bounds.getNorthEast();
+      const nw = bounds.getNorthWest();
+      const se = bounds.getSouthEast();
+      const sw = bounds.getSouthWest();
+      src.setCoordinates([
+        [nw.lng, nw.lat],
+        [ne.lng, ne.lat],
+        [se.lng, se.lat],
+        [sw.lng, sw.lat],
+      ]);
+    };
+
+    /** Lightweight: keep overlay geo-locked during pan/zoom (every frame). */
+    const onMove = () => {
+      if (!shadowRef.current) return;
+      syncCoordinates();
+    };
+
+    /** Full re-render once movement stops. */
     const onMoveEnd = () => {
       if (!shadowRef.current) return;
       const bounds = map.getBounds();
@@ -385,24 +409,15 @@ export default function ShadowMapGL({
         maxLat: bounds.getNorth(),
       };
       shadowRef.current.update(selectedTime, mapBounds, map.getZoom());
-
-      const src = map.getSource(SHADOW_CANVAS_SOURCE) as maplibregl.CanvasSource | undefined;
-      if (src) {
-        const ne = bounds.getNorthEast();
-        const nw = bounds.getNorthWest();
-        const se = bounds.getSouthEast();
-        const sw = bounds.getSouthWest();
-        src.setCoordinates([
-          [nw.lng, nw.lat],
-          [ne.lng, ne.lat],
-          [se.lng, se.lat],
-          [sw.lng, sw.lat],
-        ]);
-      }
+      syncCoordinates();
     };
 
+    map.on("move", onMove);
     map.on("moveend", onMoveEnd);
-    return () => { map.off("moveend", onMoveEnd); };
+    return () => {
+      map.off("move", onMove);
+      map.off("moveend", onMoveEnd);
+    };
   }, [selectedTime]);
 
   // ── Markers ───────────────────────────────────────────────────────────────
