@@ -375,24 +375,6 @@ export default function ShadowMapGL({
     if (!mapRef.current) return;
     const map = mapRef.current;
 
-    /** Reposition the shadow canvas source to match the current viewport bounds. */
-    const syncCoordinates = () => {
-      const src = map.getSource(SHADOW_CANVAS_SOURCE) as maplibregl.CanvasSource | undefined;
-      if (!src) return;
-      const bounds = map.getBounds();
-      const ne = bounds.getNorthEast();
-      const nw = bounds.getNorthWest();
-      const se = bounds.getSouthEast();
-      const sw = bounds.getSouthWest();
-      src.setCoordinates([
-        [nw.lng, nw.lat],
-        [ne.lng, ne.lat],
-        [se.lng, se.lat],
-        [sw.lng, sw.lat],
-      ]);
-    };
-
-    /** Full re-render once movement stops, then reposition. */
     const onMoveEnd = () => {
       if (!shadowRef.current) return;
       const bounds = map.getBounds();
@@ -403,13 +385,24 @@ export default function ShadowMapGL({
         maxLat: bounds.getNorth(),
       };
       shadowRef.current.update(selectedTime, mapBounds, map.getZoom());
-      syncCoordinates();
+
+      const src = map.getSource(SHADOW_CANVAS_SOURCE) as maplibregl.CanvasSource | undefined;
+      if (src) {
+        const ne = bounds.getNorthEast();
+        const nw = bounds.getNorthWest();
+        const se = bounds.getSouthEast();
+        const sw = bounds.getSouthWest();
+        src.setCoordinates([
+          [nw.lng, nw.lat],
+          [ne.lng, ne.lat],
+          [se.lng, se.lat],
+          [sw.lng, sw.lat],
+        ]);
+      }
     };
 
     map.on("moveend", onMoveEnd);
-    return () => {
-      map.off("moveend", onMoveEnd);
-    };
+    return () => { map.off("moveend", onMoveEnd); };
   }, [selectedTime]);
 
   // ── Markers ───────────────────────────────────────────────────────────────
@@ -486,46 +479,44 @@ export default function ShadowMapGL({
 
   return (
     <div ref={containerRef} className="h-full w-full relative">
-      {/* Location button + error toast wrapper */}
-      <div className="absolute right-4 top-4 z-[400] flex flex-col items-end gap-2">
-        <button
-          onClick={goToUserLocation}
-          disabled={locationLoading}
-          className={`flex h-11 w-11 items-center justify-center rounded-xl
-            ${isDark ? "bg-neutral-800/90 hover:bg-neutral-700/90" : "bg-white/90 hover:bg-neutral-100/90"}
-            shadow-lg backdrop-blur-sm transition-all duration-200
-            ${locationLoading ? "opacity-70 cursor-wait" : "cursor-pointer"}
-            ${locationError ? "ring-2 ring-red-500" : ""}
-          `}
-          title={locationError || "Go to my location"}
-          aria-label="Go to my location"
-        >
-          {locationLoading ? (
-            <svg className="h-5 w-5 animate-spin text-amber-500" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-            </svg>
-          ) : (
-            <svg
-              className={`h-5 w-5 ${userLocation ? "text-amber-500" : isDark ? "text-neutral-300" : "text-neutral-600"}`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v2m0 16v2m-8-10H2m20 0h-2m-2.93-5.07l-1.41 1.41m-9.32 9.32l-1.41 1.41m0-12.14l1.41 1.41m9.32 9.32l1.41 1.41" />
-            </svg>
-          )}
-        </button>
-
-        {/* Error toast — below the location button */}
-        {locationError && (
-          <div className="rounded-lg bg-red-500/90 px-3 py-2 text-xs text-white shadow-lg backdrop-blur-sm animate-fade-in">
-            {locationError}
-          </div>
+      {/* Location button */}
+      <button
+        onClick={goToUserLocation}
+        disabled={locationLoading}
+        className={`absolute right-4 top-32 z-[400] flex h-11 w-11 items-center justify-center rounded-xl
+          ${isDark ? "bg-neutral-800/90 hover:bg-neutral-700/90" : "bg-white/90 hover:bg-neutral-100/90"}
+          shadow-lg backdrop-blur-sm transition-all duration-200
+          ${locationLoading ? "opacity-70 cursor-wait" : "cursor-pointer"}
+          ${locationError ? "ring-2 ring-red-500" : ""}
+        `}
+        title={locationError || "Go to my location"}
+        aria-label="Go to my location"
+      >
+        {locationLoading ? (
+          <svg className="h-5 w-5 animate-spin text-amber-500" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+          </svg>
+        ) : (
+          <svg 
+            className={`h-5 w-5 ${userLocation ? "text-amber-500" : isDark ? "text-neutral-300" : "text-neutral-600"}`}
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor" 
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v2m0 16v2m-8-10H2m20 0h-2m-2.93-5.07l-1.41 1.41m-9.32 9.32l-1.41 1.41m0-12.14l1.41 1.41m9.32 9.32l1.41 1.41" />
+          </svg>
         )}
-      </div>
+      </button>
+
+      {/* Error toast */}
+      {locationError && (
+        <div className="absolute right-4 top-44 z-[400] rounded-lg bg-red-500/90 px-3 py-2 text-xs text-white shadow-lg backdrop-blur-sm animate-fade-in">
+          {locationError}
+        </div>
+      )}
 
       <style jsx global>{`
         .terrace-tooltip .maplibregl-popup-content {
