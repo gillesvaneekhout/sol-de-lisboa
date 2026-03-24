@@ -46,7 +46,10 @@ function getTimeFromMinutes(minutes: number, baseDate: Date): Date {
 
 function getCurrentMinutes(): number {
   const now = new Date();
-  const minutes = now.getHours() * 60 + now.getMinutes();
+  const hours = now.getHours();
+  const minutes = hours * 60 + now.getMinutes();
+  // Outside hours: default to last valid hour (22:00) instead of jumping to 08:00
+  if (hours < 8 || hours >= 22) return 22 * 60;
   return Math.max(8 * 60, Math.min(22 * 60, minutes));
 }
 
@@ -207,7 +210,7 @@ export default function Home() {
               </h1>
               <p className="text-[11px] text-neutral-400" suppressHydrationWarning>
                 {outsideHours ? (
-                  <span className="text-neutral-500">Terraces are closed</span>
+                  <span className="text-neutral-500">Showing evening view</span>
                 ) : (
                   <>{sunnyCount} sunny terrace{sunnyCount !== 1 ? "s" : ""} now</>
                 )}
@@ -252,7 +255,7 @@ export default function Home() {
                   ? opt.value === "sunny"
                     ? "bg-amber-500 text-black shadow-lg shadow-amber-500/20"
                     : opt.value === "all"
-                    ? "bg-white/20 text-white ring-1 ring-white/30"
+                    ? "bg-white/25 text-white ring-1 ring-white/50 font-bold"
                     : "bg-white/15 text-white"
                   : "glass text-neutral-400 hover:text-white active:scale-95"
               }`}
@@ -268,9 +271,9 @@ export default function Home() {
       {outsideHours && (
         <div className="absolute left-4 right-4 top-[140px] z-[450]">
           <div className="rounded-xl bg-neutral-800/90 backdrop-blur-md border border-neutral-700 px-4 py-3 text-center">
-            <p className="text-sm font-medium text-white">🌙 Terraces are closed now</p>
+            <p className="text-sm font-medium text-white">🌙 Sun has set for the day</p>
             <p className="text-xs text-neutral-400 mt-1">
-              Use the time slider to plan your visit tomorrow
+              Showing evening view — use the slider to plan ahead
             </p>
           </div>
         </div>

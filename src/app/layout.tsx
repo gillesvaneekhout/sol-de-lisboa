@@ -9,7 +9,6 @@ export const metadata: Metadata = {
     "Discover which Lisbon terraces are in the sun right now. Bars, restaurants and cafés with outdoor seating.",
   manifest: "/manifest.json",
   appleWebApp: {
-    capable: true,
     statusBarStyle: "black-translucent",
     title: "SunTracker",
   },
