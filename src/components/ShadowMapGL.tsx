@@ -392,13 +392,7 @@ export default function ShadowMapGL({
       ]);
     };
 
-    /** Lightweight: keep overlay geo-locked during pan/zoom (every frame). */
-    const onMove = () => {
-      if (!shadowRef.current) return;
-      syncCoordinates();
-    };
-
-    /** Full re-render once movement stops. */
+    /** Full re-render once movement stops, then reposition. */
     const onMoveEnd = () => {
       if (!shadowRef.current) return;
       const bounds = map.getBounds();
@@ -412,10 +406,8 @@ export default function ShadowMapGL({
       syncCoordinates();
     };
 
-    map.on("move", onMove);
     map.on("moveend", onMoveEnd);
     return () => {
-      map.off("move", onMove);
       map.off("moveend", onMoveEnd);
     };
   }, [selectedTime]);
