@@ -28,6 +28,22 @@ body {
   color: var(--text-primary);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* iOS safe area support */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Safe area utilities */
+.safe-top {
+  padding-top: max(1rem, env(safe-area-inset-top));
+}
+.safe-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+.safe-left {
+  padding-left: max(1rem, env(safe-area-inset-left));
+}
+.safe-right {
+  padding-right: max(1rem, env(safe-area-inset-right));
 }
 
 /* Leaflet overrides for dark theme */
@@ -71,22 +87,38 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--sunny);
   cursor: pointer;
   box-shadow: 0 0 12px rgba(251, 191, 36, 0.5);
+  /* Increase touch target without changing visual size */
+  border: 8px solid transparent;
+  background-clip: padding-box;
 }
 
 input[type="range"]::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--sunny);
   cursor: pointer;
-  border: none;
+  border: 8px solid transparent;
+  background-clip: padding-box;
   box-shadow: 0 0 12px rgba(251, 191, 36, 0.5);
+}
+
+/* Ensure minimum tap target sizes (44px per Apple HIG) */
+button, [role="button"], a {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Exception for inline/small buttons that have proper container spacing */
+.inline-btn {
+  min-height: auto;
+  min-width: auto;
 }
 
 /* Scrollbar styles */

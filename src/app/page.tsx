@@ -207,7 +207,7 @@ export default function Home() {
             <button
               data-testid="view-map"
               onClick={() => setView("map")}
-              className={`rounded-lg px-4 py-1.5 text-xs font-semibold transition-all ${
+              className={`rounded-lg px-5 py-2.5 text-xs font-semibold transition-all min-h-[44px] active:scale-95 ${
                 view === "map"
                   ? "bg-amber-500 text-black shadow-lg shadow-amber-500/25"
                   : "text-neutral-400 hover:text-white"
@@ -218,7 +218,7 @@ export default function Home() {
             <button
               data-testid="view-list"
               onClick={() => setView("list")}
-              className={`rounded-lg px-4 py-1.5 text-xs font-semibold transition-all ${
+              className={`rounded-lg px-5 py-2.5 text-xs font-semibold transition-all min-h-[44px] active:scale-95 ${
                 view === "list"
                   ? "bg-amber-500 text-black shadow-lg shadow-amber-500/25"
                   : "text-neutral-400 hover:text-white"
@@ -229,18 +229,18 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Filter pills */}
+        {/* Filter pills - increased touch targets */}
         <div className="flex gap-2 overflow-x-auto mt-2 px-1 no-scrollbar" data-testid="filter-bar">
           {filterOptions.map((opt) => (
             <button
               key={opt.value}
               onClick={() => setFilterMode(opt.value)}
-              className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition-all ${
+              className={`whitespace-nowrap rounded-full px-4 py-2.5 text-xs font-semibold transition-all min-h-[44px] ${
                 filterMode === opt.value
                   ? opt.value === "sunny"
                     ? "bg-amber-500 text-black shadow-lg shadow-amber-500/20"
                     : "bg-white/15 text-white"
-                  : "glass text-neutral-400 hover:text-white"
+                  : "glass text-neutral-400 hover:text-white active:scale-95"
               }`}
               data-testid={`filter-${opt.value}`}
             >
@@ -250,9 +250,9 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Floating time slider */}
-      <div className="absolute bottom-4 left-4 right-4 z-[500]" data-testid="time-slider-container">
-        <div className="rounded-2xl glass px-4 py-3">
+      {/* Floating time slider - with safe area */}
+      <div className="absolute bottom-4 left-4 right-4 z-[500] safe-bottom" data-testid="time-slider-container">
+        <div className="rounded-2xl glass px-4 py-4">
           <TimeSlider
             value={timeMinutes}
             onChange={setTimeMinutes}
