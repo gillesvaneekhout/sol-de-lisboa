@@ -1,5 +1,7 @@
 # ☀️ Sol de Lisboa — Lisbon Terrace Sun Tracker
 
+**Live demo:** [terrace-sun-tracker.vercel.app](https://terrace-sun-tracker.vercel.app)
+
 A mobile-first PWA that shows bars, restaurants, and cafés in Lisbon with terraces, and tells you when they're in the sun.
 
 ## Setup
@@ -37,7 +39,9 @@ The algorithm:
 
 ## Dataset
 
-30 real Lisbon terraces across Bairro Alto, Príncipe Real, LX Factory, Cais do Sodré, Alfama, Chiado, and Graça. Each venue has approximate facing direction based on actual street layout.
+47 real Lisbon terraces across Bairro Alto, Príncipe Real, LX Factory, Cais do Sodré, Alfama, Chiado, Graça, Santos, Alcântara, and Belém. Each venue has curated facing direction based on actual street layout.
+
+Archetypes: rooftop (8), miradouro (9), waterfront (6), courtyard (5), street (19).
 
 ## Data pipeline notes
 
