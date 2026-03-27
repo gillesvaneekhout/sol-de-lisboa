@@ -450,12 +450,25 @@ export default function ShadowMapGL({
         .setLngLat([point.lng, point.lat])
         .addTo(map);
 
+      // Build tooltip content with sun status
+      const sunIcon = terrace.sunStatus === "sunny" ? "☀️" : terrace.sunStatus === "partial" ? "🌤️" : "☁️";
+      const sunText = terrace.sunStatus === "sunny" && terrace.sunEndTime 
+        ? `until ${terrace.sunEndTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`
+        : terrace.sunStatus !== "sunny" && terrace.nextSunnyTime
+        ? `sunny from ${terrace.nextSunnyTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`
+        : terrace.sunStatus;
+      
       const popup = new maplibregl.Popup({
         closeButton: false,
         closeOnClick: false,
         offset: [0, -12],
         className: "terrace-tooltip",
-      }).setHTML(`<span style="font-size:12px;font-weight:500;">${terrace.name}</span>`);
+      }).setHTML(`
+        <div style="font-size:12px;">
+          <div style="font-weight:600;">${terrace.name}</div>
+          <div style="font-size:10px;color:#888;margin-top:2px;">${sunIcon} ${sunText}</div>
+        </div>
+      `);
 
       el.addEventListener("mouseenter", () => popup.setLngLat([point.lng, point.lat]).addTo(map));
       el.addEventListener("mouseleave", () => popup.remove());
