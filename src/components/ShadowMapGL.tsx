@@ -370,11 +370,30 @@ export default function ShadowMapGL({
     rafRef.current = requestAnimationFrame(doUpdate);
   }, [selectedTime, mapLoaded]);
 
-  // Also update on map move
+  // Also update on map move — reposition during pan, full re-render on moveend
   useEffect(() => {
     if (!mapRef.current) return;
     const map = mapRef.current;
 
+    // During pan/zoom: reposition the canvas source coordinates to stay geo-locked
+    const onMove = () => {
+      const src = map.getSource(SHADOW_CANVAS_SOURCE) as maplibregl.CanvasSource | undefined;
+      if (src) {
+        const bounds = map.getBounds();
+        const ne = bounds.getNorthEast();
+        const nw = bounds.getNorthWest();
+        const se = bounds.getSouthEast();
+        const sw = bounds.getSouthWest();
+        src.setCoordinates([
+          [nw.lng, nw.lat],
+          [ne.lng, ne.lat],
+          [se.lng, se.lat],
+          [sw.lng, sw.lat],
+        ]);
+      }
+    };
+
+    // After pan/zoom: full re-render with new bounds
     const onMoveEnd = () => {
       if (!shadowRef.current) return;
       const bounds = map.getBounds();
@@ -401,8 +420,12 @@ export default function ShadowMapGL({
       }
     };
 
+    map.on("move", onMove);
     map.on("moveend", onMoveEnd);
-    return () => { map.off("moveend", onMoveEnd); };
+    return () => {
+      map.off("move", onMove);
+      map.off("moveend", onMoveEnd);
+    };
   }, [selectedTime]);
 
   // ── Markers ───────────────────────────────────────────────────────────────
