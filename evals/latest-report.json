@@ -1,19 +1,18 @@
 {
-  "generatedAt": "2026-03-14T13:44:49.282Z",
+  "generatedAt": "2026-03-27T20:07:01.964Z",
   "venueCount": 47,
   "coordinateSources": {
     "osm": 41,
-    "estimated": 3,
-    "curated": 3
+    "curated": 6
   },
   "terraceCoordinateSources": {
     "osm": 17,
-    "curated": 25,
-    "estimated": 5
+    "curated": 28,
+    "estimated": 2
   },
   "confidence": {
-    "high": 42,
-    "low": 5
+    "high": 45,
+    "low": 2
   },
   "terracePointCoverage": {
     "explicit": 22,
@@ -184,9 +183,9 @@
     {
       "id": "rio-maravilha",
       "name": "Rio Maravilha",
-      "confidence": "low",
-      "coordinateSource": "estimated",
-      "terraceCoordinateSource": "estimated",
+      "confidence": "high",
+      "coordinateSource": "curated",
+      "terraceCoordinateSource": "curated",
       "archetype": "rooftop"
     }
   ]

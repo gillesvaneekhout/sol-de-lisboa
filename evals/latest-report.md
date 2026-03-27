@@ -1,6 +1,6 @@
 # Latest Eval Report
 
-Generated: 2026-03-14T13:44:49.282Z
+Generated: 2026-03-27T20:07:01.964Z
 
 ## Overview
 - Venues: 47
@@ -13,8 +13,8 @@ Generated: 2026-03-14T13:44:49.282Z
 - No schedule (fallback): 0
 
 ## Confidence
-- high: 42
-- low: 5
+- high: 45
+- low: 2
 
 ## Archetypes
 - street: 19
@@ -25,13 +25,12 @@ Generated: 2026-03-14T13:44:49.282Z
 
 ## Coordinate Sources
 - osm: 41
-- estimated: 3
-- curated: 3
+- curated: 6
 
 ## Terrace Coordinate Sources
 - osm: 17
-- curated: 25
-- estimated: 5
+- curated: 28
+- estimated: 2
 
 ## Building Data Sources (legacy fallback)
 These building heights are used for visual display only. Shadow accuracy comes from LiDAR schedules.
@@ -71,4 +70,4 @@ These building heights are used for visual display only. Shadow accuracy comes f
 - park-bar: confidence=high, archetype=rooftop, coord=osm, terrace=curated
 - topo-chiado: confidence=high, archetype=rooftop, coord=osm, terrace=curated
 - silk-club: confidence=high, archetype=rooftop, coord=osm, terrace=curated
-- rio-maravilha: confidence=low, archetype=rooftop, coord=estimated, terrace=estimated
+- rio-maravilha: confidence=high, archetype=rooftop, coord=curated, terrace=curated
