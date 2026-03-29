@@ -65,18 +65,19 @@ const SHADOW_FRAG = `
   #endif
 
   uniform sampler2D u_heightMap;
-  uniform float user_width;      // texture width  (pixels)
-  uniform float user_height;     // texture height (pixels)
-  uniform float user_maxHeight;  // max height in km
-  uniform float user_zoom;       // map zoom level
-  uniform float user_topYCoord;  // web mercator Y of top-left pixel / tile
-  uniform float user_ySize;      // web mercator Y span of texture
-  uniform float user_west;       // west longitude (degrees)
-  uniform float user_dLng;       // longitude span (degrees)
-  uniform float user_dec;        // sun declination (radians)
-  uniform float user_Hi;         // sun hour angle base
-  uniform vec4 u_shadowColor;    // rgba shadow color
-  uniform float user_step;       // step size in pixels
+  uniform float user_width;         // texture width  (pixels)
+  uniform float user_height;        // texture height (pixels)
+  uniform float user_maxHeight;     // max height in km
+  uniform float user_zoom;          // map zoom level (kept for reference, not used for kmPerPixel)
+  uniform float user_topYCoord;     // web mercator Y of top-left pixel / tile
+  uniform float user_ySize;         // web mercator Y span of texture
+  uniform float user_west;          // west longitude (degrees)
+  uniform float user_dLng;          // longitude span (degrees)
+  uniform float user_dec;           // sun declination (radians)
+  uniform float user_Hi;            // sun hour angle base
+  uniform vec4 u_shadowColor;       // rgba shadow color
+  uniform float user_step;          // step size in pixels
+  uniform float user_kmPerTexPixel; // km per texture pixel (geo-derived, accounts for viewport/texture ratio)
 
   varying vec2 vTexCoord;
   varying vec2 vTexCoordFull;
@@ -127,8 +128,12 @@ const SHADOW_FRAG = `
     float sun_altitude = asin(
       sin(user_lat) * sin(user_dec) + cos(user_lat) * cos(user_dec) * cos(user_H));
 
-    float user_zoom_factor = pow(2.0, user_zoom);
-    float user_kmPerPixel = (156.5430339296875 / user_zoom_factor) * abs(cos(user_lat));
+    // Use geo-derived km/texture-pixel (precomputed in JS from bounds).
+    // The zoom-based formula was wrong because it computed km/map-pixel,
+    // but the shader steps in texture pixels. When viewport != textureSize,
+    // each texture pixel represents more ground than a map pixel, making
+    // shadows too long (appearing as if the sun were lower/later).
+    float user_kmPerPixel = user_kmPerTexPixel;
 
     float user_dx = (-sin(sun_azimuth) * cos(sun_altitude) * user_step) / user_width;
     float user_dy =  (cos(sun_azimuth) * cos(sun_altitude) * user_step) / user_height;
@@ -171,7 +176,7 @@ const SHADOW_FRAG = `
     if (user_lit == 1.0) {
       gl_FragColor = vec4(0.0); // transparent = in sun
     } else {
-      gl_FragColor = u_shadowColor;
+      gl_FragColor = vec4(u_shadowColor.rgb * u_shadowColor.a, u_shadowColor.a);
     }
   }
 `;
@@ -303,6 +308,7 @@ export function createShadowCanvas(options: ShadowCanvasOptions): ShadowCanvas |
   const uHi = gl.getUniformLocation(shadowProg, "user_Hi");
   const uShadowColor = gl.getUniformLocation(shadowProg, "u_shadowColor");
   const uStep = gl.getUniformLocation(shadowProg, "user_step");
+  const uKmPerTexPixel = gl.getUniformLocation(shadowProg, "user_kmPerTexPixel");
 
   // Buffers
   const vbuf = gl.createBuffer()!;
@@ -441,6 +447,12 @@ export function createShadowCanvas(options: ShadowCanvasOptions): ShadowCanvas |
     // Max height in km
     const maxHeight = Math.max(...buildings.map(b => b.properties.height || 5)) / 1000;
 
+    // Compute km per texture pixel from geographic bounds (not from zoom).
+    // This fixes the bug where shadows were too long because kmPerPixel was computed
+    // for map (CSS) pixels but the shader steps in texture pixels.
+    const dLngKm = (maxLng - minLng) * 111.32 * Math.cos(centerLat * Math.PI / 180);
+    const kmPerTexPixel = dLngKm / textureSize;
+
     if (!gl) return;
     // Render to canvas
     gl.viewport(0, 0, textureSize, textureSize);
@@ -466,6 +478,7 @@ export function createShadowCanvas(options: ShadowCanvasOptions): ShadowCanvas |
     gl.uniform1f(uHi, Hi);
     gl.uniform4fv(uShadowColor, shadowColor);
     gl.uniform1f(uStep, 1.0);
+    gl.uniform1f(uKmPerTexPixel, kmPerTexPixel);
 
     // Screen quad positions (clip coords -1..1) + texture coords (0..1)
     // The texture coords map the viewport to the height texture
