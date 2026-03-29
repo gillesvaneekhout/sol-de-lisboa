@@ -228,7 +228,7 @@ export default function ShadowMapGL({
         zoom: map.getZoom(),
         // Dark mode: use a lighter purple/blue tint so shadows are visible against dark background
         // Light mode: use darker shadows for contrast
-        shadowColor: isDark ? [0.1, 0.05, 0.25, 0.5] : [0, 0, 0.15, 0.7],
+        shadowColor: isDark ? [0.05, 0.02, 0.15, 0.35] : [0, 0, 0.1, 0.55],
         textureSize: 1024,
       });
 
@@ -370,30 +370,15 @@ export default function ShadowMapGL({
     rafRef.current = requestAnimationFrame(doUpdate);
   }, [selectedTime, mapLoaded]);
 
-  // Also update on map move — reposition during pan, full re-render on moveend
+  // Re-render + re-register on moveend only.
+  // Do NOT update coordinates mid-pan (onMove) — that remaps stale canvas content
+  // to new geo positions every frame, making shadows drift with the camera.
+  // MapLibre canvas sources are geo-registered: they stay at their set coordinates
+  // automatically as the user pans. Only a full re-render needs a coordinate update.
   useEffect(() => {
     if (!mapRef.current) return;
     const map = mapRef.current;
 
-    // During pan/zoom: reposition the canvas source coordinates to stay geo-locked
-    const onMove = () => {
-      const src = map.getSource(SHADOW_CANVAS_SOURCE) as maplibregl.CanvasSource | undefined;
-      if (src) {
-        const bounds = map.getBounds();
-        const ne = bounds.getNorthEast();
-        const nw = bounds.getNorthWest();
-        const se = bounds.getSouthEast();
-        const sw = bounds.getSouthWest();
-        src.setCoordinates([
-          [nw.lng, nw.lat],
-          [ne.lng, ne.lat],
-          [se.lng, se.lat],
-          [sw.lng, sw.lat],
-        ]);
-      }
-    };
-
-    // After pan/zoom: full re-render with new bounds
     const onMoveEnd = () => {
       if (!shadowRef.current) return;
       const bounds = map.getBounds();
@@ -420,10 +405,8 @@ export default function ShadowMapGL({
       }
     };
 
-    map.on("move", onMove);
     map.on("moveend", onMoveEnd);
     return () => {
-      map.off("move", onMove);
       map.off("moveend", onMoveEnd);
     };
   }, [selectedTime]);
